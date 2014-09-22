@@ -9,6 +9,8 @@
         {% block title %}{% title %}{% endblock %}
     </title>
     <link rel="stylesheet" type="text/css" href="{% static "css/prototype/main/base.css" %}">
+    <script type="text/javascript" src="{% static "js/jquery.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/base_scripts.js" %}"></script>
 </head>
 <body>
 
@@ -21,12 +23,12 @@
     <div class="page_wrapper">
         <div class="popup_menu_wrapper">
             <div class="popup_menu">
-                <ul id="popup_menu" class="popup_menu">
+                <ul id="popup_menu_list" class="popup_menu_list">
                     <li>Language</li>
                     <li>Skin</li>
                     <li>Login Password</li>
                 </ul>
-                <div class="popup_menu_hide_button">
+                <div id="popup_menu_hide_button" class="popup_menu_hide_button">
                     hide
                 </div>
             </div>

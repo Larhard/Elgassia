@@ -54,19 +54,20 @@ div.content {
     height: 100%;
 }
 
-ul.popup_menu {
+ul.popup_menu_list {
     margin: 0;
     padding: 0;
     list-style: none;
+    display: none;
 }
 
-ul.popup_menu li {
+ul.popup_menu_list li {
     margin: 5px;
     padding: 5px;
     border: 1px solid #000000;
 }
 
-ul.popup_menu li:hover {
+ul.popup_menu_list li:hover {
     background: rgba(0, 0, 0, 0.10);
 }
 
