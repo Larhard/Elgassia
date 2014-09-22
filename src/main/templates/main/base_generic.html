@@ -1,16 +1,53 @@
 {% load base_tags %}
+{% load staticfiles %}
 
 <!DOCTYPE html>
 <html>
-<head lang="en">
+<head lang="{% language %}">
     <meta charset="UTF-8">
     <title>
         {% block title %}{% title %}{% endblock %}
     </title>
+    <link rel="stylesheet" type="text/css" href="{% static "css/prototype/main/base.css" %}">
 </head>
 <body>
 
-<a href="{% url 'main:home' %}">Home</a>
+<div class="main_wrapper">
+    <div class="title_bar">
+        {% block site_title %}
+            <a href="{% url 'main:home' %}">Home</a>
+        {% endblock %}
+    </div>
+    <div class="page_wrapper">
+        <div class="popup_menu_wrapper">
+            <div class="popup_menu">
+                <ul id="popup_menu" class="popup_menu">
+                    <li>Language</li>
+                    <li>Skin</li>
+                    <li>Login Password</li>
+                </ul>
+                <div class="popup_menu_hide_button">
+                    hide
+                </div>
+            </div>
+        </div>
+        <div class="left_page">
+            <div class="main_menu_container">
+                <ul id="main_menu" class="main_menu">
+                    <li>Home</li>
+                    <li>link 2</li>
+                    <li>link 3</li>
+                </ul>
+            </div>
+        </div>
+        <div class="center_page">
+            <div class="content">
+                Some random content
+            </div>
+        </div>
+    </div>
+</div>
+
 
 </body>
 </html>
