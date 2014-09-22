@@ -1,10 +1,10 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 
-urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'elgassia.views.home', name='home'),
-    # url(r'^blog/', include('blog.urls')),
+import main.urls
 
-    url(r'^admin/', include(admin.site.urls)),
-)
+urlpatterns = patterns('',
+                       url(r'^admin/', include(admin.site.urls)),
+                       url(r'^$', 'main.views.home'),
+                       url(r'^main/', include(main.urls, namespace='main')),
+                       )
