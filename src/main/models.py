@@ -1,3 +1,10 @@
 from django.db import models
+import model_generics
 
-# Create your models here.
+
+class MainMenu(model_generics.MenuGeneric):
+    pass
+
+
+class PopupMenu(model_generics.MenuGeneric):
+    pass

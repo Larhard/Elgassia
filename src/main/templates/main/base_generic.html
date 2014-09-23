@@ -1,4 +1,5 @@
-{% load base_tags %}
+{% load main.base_tags %}
+{% load main.menus %}
 {% load staticfiles %}
 
 <!DOCTYPE html>
@@ -24,21 +25,23 @@
         <div class="popup_menu_wrapper">
             <div class="popup_menu">
                 <ul id="popup_menu_list" class="popup_menu_list">
-                    <li>Language</li>
-                    <li>Skin</li>
-                    <li>Login Password</li>
+                    {% get_popup_menu %}
+                    {% for i in popup_menu %}
+                        <li>{{ i }}</li>
+                    {% endfor %}
                 </ul>
                 <div id="popup_menu_hide_button" class="popup_menu_hide_button">
-                    hide
+                    show
                 </div>
             </div>
         </div>
         <div class="left_page">
             <div class="main_menu_container">
                 <ul id="main_menu" class="main_menu">
-                    <li>Home</li>
-                    <li>link 2</li>
-                    <li>link 3</li>
+                    {% get_main_menu %}
+                    {% for i in main_menu %}
+                        <li>{{ i }}</li>
+                    {% endfor %}
                 </ul>
             </div>
         </div>
