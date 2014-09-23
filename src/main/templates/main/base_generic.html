@@ -27,7 +27,15 @@
                 <ul id="popup_menu_list" class="popup_menu_list">
                     {% get_popup_menu %}
                     {% for i in popup_menu %}
-                        <li>{{ i }}</li>
+                        {% if i.dest_name %}
+                            <a href="{% url i.dest_name %}">
+                        {% elif i.dest_url %}
+                            <a href="{{ i.dest_url }}">
+                        {% endif %}
+                                <li>{{ i.title }}</li>
+                        {% if i.dest_name or i.dest_url %}
+                            </a>
+                        {% endif %}
                     {% endfor %}
                 </ul>
                 <div id="popup_menu_hide_button" class="popup_menu_hide_button">
@@ -40,7 +48,15 @@
                 <ul id="main_menu" class="main_menu">
                     {% get_main_menu %}
                     {% for i in main_menu %}
-                        <li>{{ i }}</li>
+                        {% if i.dest_name %}
+                            <a href="{% url i.dest_name %}">
+                        {% elif i.dest_url %}
+                            <a href="{{ i.dest_url }}">
+                        {% endif %}
+                                <li>{{ i.title }}</li>
+                        {% if i.dest_name or i.dest_url %}
+                            </a>
+                        {% endif %}
                     {% endfor %}
                 </ul>
             </div>

@@ -1,11 +1,13 @@
 from django import template
 
+import main.models
+
 register = template.Library()
 
 
-class PopupMenuNode(template.Node):  # TODO connect with model
+class PopupMenuNode(template.Node):
     def render(self, context):
-        context['popup_menu'] = ['Language', 'Skin', 'login, password']
+        context['popup_menu'] = main.models.PopupMenu.objects.all()
         return ''
 
 
@@ -14,9 +16,9 @@ def get_popup_menu(parser, token):
     return PopupMenuNode()
 
 
-class MainMenuNode(template.Node):  # TODO connect with model
+class MainMenuNode(template.Node):
     def render(self, context):
-        context['main_menu'] = ['New Home', 'New Link 1', 'New Link 2']
+        context['main_menu'] = main.models.MainMenu.objects.all()
         return ''
 
 
