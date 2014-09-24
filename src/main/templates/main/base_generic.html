@@ -11,6 +11,8 @@
     </title>
     <link rel="stylesheet" type="text/css" href="{% static "css/prototype/main/base.css" %}">
     <script type="text/javascript" src="{% static "js/jquery.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/jquery-ui.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/common.js" %}"></script>
     <script type="text/javascript" src="{% static "js/base_scripts.js" %}"></script>
 </head>
 <body>
@@ -45,20 +47,29 @@
         </div>
         <div class="left_page">
             <div class="main_menu_container">
-                <ul id="main_menu" class="main_menu">
+                <ul id="main_menu_list" class="main_menu">
                     {% get_main_menu %}
                     {% for i in main_menu %}
+                        <li data-id="{{ i.id }}">
                         {% if i.dest_name %}
-                            <a href="{% url i.dest_name %}">
-                        {% elif i.dest_url %}
-                            <a href="{{ i.dest_url }}">
-                        {% endif %}
-                                <li>{{ i.title }}</li>
-                        {% if i.dest_name or i.dest_url %}
+                            <a class="block main_menu_entry" href="{% url i.dest_name %}">
+                                {{ i.title }}
                             </a>
+                        {% elif i.dest_url %}
+                            <a class="block main_menu_entry" href="{{ i.dest_url }}">
+                                {{ i.title }}
+                            </a>
+                        {% else %}
+                            <div class="main_menu_entry">
+                                {{ i.title }}
+                            </div>
                         {% endif %}
+                        </li>
                     {% endfor %}
                 </ul>
+                <div class="main_menu_config">
+                    <button id="main_menu_save_button">Save</button>
+                </div>
             </div>
         </div>
         <div class="center_page">

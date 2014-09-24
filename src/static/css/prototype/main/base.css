@@ -79,7 +79,6 @@ ul.main_menu {
 
 ul.main_menu li {
     margin: 20px 10px 20px -30px;
-    padding: 10px;
     border: 1px solid #000000;
 }
 
@@ -90,4 +89,16 @@ ul.main_menu li:hover {
 div.popup_menu_hide_button {
     text-align: center;
     height: 16px;
+}
+
+.block {
+    display: block;
+}
+
+.main_menu_entry {
+    padding: 10px
+}
+
+div.main_menu_config {
+    text-align: right;
 }

@@ -7,7 +7,7 @@ register = template.Library()
 
 class PopupMenuNode(template.Node):
     def render(self, context):
-        context['popup_menu'] = main.models.PopupMenu.objects.all()
+        context['popup_menu'] = main.models.PopupMenu.objects.order_by('position')
         return ''
 
 
@@ -18,7 +18,7 @@ def get_popup_menu(parser, token):
 
 class MainMenuNode(template.Node):
     def render(self, context):
-        context['main_menu'] = main.models.MainMenu.objects.all()
+        context['main_menu'] = main.models.MainMenu.objects.order_by('position')
         return ''
 
 
