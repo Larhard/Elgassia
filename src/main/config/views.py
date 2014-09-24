@@ -4,13 +4,23 @@ import json
 
 
 def save_main_menu(request):
-    menu_entries = MainMenu.objects
-    tmp = request.POST.keys()
-    menu_order = request.POST.getlist('menu_order[]')
-    for pos, idx in enumerate(menu_order):
-        k = menu_entries.get(id=idx)
-        k.position = pos
-        k.save()
+    error = ''
 
-    response = {'success': True}
+    # TODO edit url's
+
+    try:
+        menu_db = MainMenu.objects
+        menu_order = request.POST.getlist('idx[]')
+        title = request.POST.getlist('title[]')
+        dest_name = request.POST.getlist('dest_name[]')
+        dest_url = request.POST.getlist('dest_url[]')
+
+        for pos, entry in enumerate(zip(menu_order, title, dest_name, dest_url)):
+            k = menu_db.get(id=entry[0])
+            k.position, k.title, k.dest_name, k.dest_url = entry
+            k.save()
+    except Exception as e:
+        error = e.message
+
+    response = {'success': error == '', 'error': error}
     return HttpResponse(json.dumps(response), content_type='application/json')

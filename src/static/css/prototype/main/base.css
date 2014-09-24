@@ -102,3 +102,22 @@ div.popup_menu_hide_button {
 div.main_menu_config {
     text-align: right;
 }
+
+ul.clean {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+ul.clean li {
+    margin: 0;
+    padding: 0;
+}
+
+.hidden {
+    display: none;
+}
+
+div.main_menu_entry_edit input {
+    width: 97%;
+}

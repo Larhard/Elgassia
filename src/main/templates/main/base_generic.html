@@ -46,35 +46,47 @@
             </div>
         </div>
         <div class="left_page">
-            <div class="main_menu_container">
-                <ul id="main_menu_list" class="main_menu">
+            <div class="main_menu_container editable_container">
+                <ul id="main_menu_list" class="main_menu sortable">
                     {% get_main_menu %}
                     {% for i in main_menu %}
-                        <li data-id="{{ i.id }}">
-                        {% if i.dest_name %}
-                            <a class="block main_menu_entry" href="{% url i.dest_name %}">
-                                {{ i.title }}
-                            </a>
-                        {% elif i.dest_url %}
-                            <a class="block main_menu_entry" href="{{ i.dest_url }}">
-                                {{ i.title }}
-                            </a>
-                        {% else %}
-                            <div class="main_menu_entry">
-                                {{ i.title }}
+                        <li>
+                            {% if i.dest_name %}
+                                <a class="block main_menu_entry editable" href="{% url i.dest_name %}">
+                                    {{ i.title }}
+                                </a>
+                            {% elif i.dest_url %}
+                                <a class="block main_menu_entry editable" href="{{ i.dest_url }}">
+                                    {{ i.title }}
+                                </a>
+                            {% else %}
+                                <div class="main_menu_entry editable">
+                                    {{ i.title }}
+                                </div>
+                            {% endif %}
+
+                            <div class="main_menu_entry editable hidden main_menu_entry_edit">
+                                <ul class="clean">
+                                    <li><label>title:<br><input name="title" type="text" value="{{ i.title }}"></label></li>
+                                    <li><label>dest_name:<br><input name="dest_name" type="text" value="{{ i.dest_name }}"></label></li>
+                                    <li><label>dest_url:<br><input name="dest_url" type="text" value="{{ i.dest_url }}"></label></li>
+                                    <input type="hidden" name="idx" value="{{ i.id }}">
+                                </ul>
                             </div>
-                        {% endif %}
                         </li>
                     {% endfor %}
                 </ul>
                 <div class="main_menu_config">
-                    <button id="main_menu_save_button">Save</button>
+                    <button class="simple_edit_button">edit</button>
+                    <button id="main_menu_save_button" class="editable hidden">save</button>
                 </div>
             </div>
         </div>
         <div class="center_page">
             <div class="content">
-                Some random content
+                <span>
+                    Some random content
+                </span>
             </div>
         </div>
     </div>
