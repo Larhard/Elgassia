@@ -24,3 +24,21 @@ function find_first_children(containers, pattern) {
     }
     return result;
 }
+
+function submit_and_reload(url, data) {
+    data = typeof data != 'undefined' ? data : {};
+
+    data['csrfmiddlewaretoken'] = csrftoken;
+    $.post(url,
+        data,
+        function(data) {
+            console.log(data);
+            if (data['success'] == true) {
+                location.reload()
+            } else {
+                console.log(data['error']);
+                alert(data['error']);
+            }
+        }
+    );
+}

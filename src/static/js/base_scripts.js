@@ -21,26 +21,14 @@ function main_menu_save() {
         remove.push($(this).prop("checked"));
     });
 
-    $.post(main_menu_save_url,
+    submit_and_reload(main_menu_save_url,
         {
-            'csrfmiddlewaretoken': csrftoken,
             'idx[]': idx,
             'title[]': title,
             'dest_name[]': dest_name,
             'dest_url[]': dest_url,
             'remove[]': remove
-        },
-        function(data) {
-            console.log(data);
-            if (data['success'] == true) {
-                console.log("Successfully saved");
-                location.reload()
-            } else {
-                console.log(data['error']);
-                alert(data['error']);
-            }
-        }
-    );
+        });
 }
 
 function toggle_button() {
@@ -72,42 +60,14 @@ function main_menu_add_entry() {
 }
 
 function logout_button() {
-    $.post(logout_url,
-        {
-            'csrfmiddlewaretoken': csrftoken
-        },
-        function(data) {
-            console.log(data);
-            if (data['success'] == true) {
-                location.reload()
-            } else {
-                console.log(data['error']);
-                alert(data['error']);
-            }
-        }
-    );
+    submit_and_reload(logout_url)
 }
 
 function login_button() {
     var login = $(".login_entry[name*='login']").val();
     var password = $(".login_entry[name*='password']").val();
 
-    $.post(login_url,
-        {
-            'csrfmiddlewaretoken': csrftoken,
-            'login': login,
-            'password': password
-        },
-        function(data) {
-            console.log(data);
-            if (data['success'] == true) {
-                location.reload()
-            } else {
-                console.log(data['error']);
-                alert(data['error']);
-            }
-        }
-    );
+    submit_and_reload(login_url, {"login": login, "password": password});
 }
 
 $(document).ready(function() {
