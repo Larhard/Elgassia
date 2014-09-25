@@ -1,13 +1,22 @@
 <li class="toggleable_container">
     {% if not user.is_authenticated %}
-        <div class="toggleable hidden">
+        <div class="toggleable hidden popup_entry">
             <label>login: <input class="login_entry" type="text" name="login"></label>
             <label>password: <input class="login_entry" type="password" name="password"></label>
             <button id="login_button">login</button>
         </div>
-        <button class="toggleable toggle_button">login</button>
+        <div class="toggleable popup_entry">
+            <button class="toggle_button">login</button>
+        </div>
     {% else %}
-        Logged as {{ user.username }}
-        <button id="logout_button">logout</button>
+        <div class="toggleable popup_entry">
+            Logged as {{ user.username }}
+            <button id="logout_button">logout</button>
+        </div>
     {% endif %}
 </li>
+{% if user.is_staff %}
+    <li>
+        <a class="block popup_entry" href="{% url 'main:config:page_list' %}">Page List</a>
+    </li>
+{% endif %}

@@ -70,6 +70,41 @@ function login_button() {
     submit_and_reload(login_url, {"login": login, "password": password});
 }
 
+function page_list_add() {
+    $("#page_list").append(
+        '<tr>' +
+        '    <td class="page_list_entry" data-name="idx">-1</td>' +
+        '    <td class="page_list_entry" data-name="title" contenteditable="true">None</td>' +
+        '    <td>' +
+        '        <label>remove:' +
+        '            <input class="page_list_entry" type="checkbox" name="remove"></label>' +
+        '    </td>' +
+        '</tr>'
+    )
+}
+
+function page_list_save() {
+    var idx = [];
+    var title = [];
+    var remove = [];
+
+    $(".page_list_entry[data-name*='idx']").each(function() {
+        idx.push($(this).html());
+    });
+    $(".page_list_entry[data-name*='title']").each(function() {
+        title.push($(this).html())
+    });
+    $(".page_list_entry[name*='remove']").each(function() {
+        remove.push($(this).prop("checked"));
+    });
+
+    submit_and_reload(page_list_save_url, {
+        'idx': idx,
+        'title': title,
+        'remove': remove
+    })
+}
+
 $(document).ready(function() {
     $("#popup_menu_hide_button").click(function() {
         $("#popup_menu_list").slideToggle();
@@ -84,7 +119,7 @@ $(document).ready(function() {
         $(this).click(sorting_button)
     });
     $("#main_menu_add_entry_button").click(main_menu_add_entry);
-    $("#login_button").click(login_button)
+    $("#login_button").click(login_button);
     $("input.login_entry").keypress(function(key) {
         if ((key.which && key.which == 13) || (key.keyCode && key.keyCode == 13)) {
             $("#login_button").click();
@@ -93,5 +128,8 @@ $(document).ready(function() {
             return true;
         }
     });
-    $("#logout_button").click(logout_button)
+    $("#logout_button").click(logout_button);
+    $("#page_list_add_button").click(page_list_add);
+    $("#page_list_save_button").click(page_list_save);
+    $(".")
 });

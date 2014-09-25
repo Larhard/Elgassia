@@ -1,0 +1,30 @@
+{% extends 'main/base_generic.html' %}
+
+{% block title %}
+    {{ block.super }}
+    - Page List
+{% endblock %}
+
+{% block content %}
+    Page List:
+    <table id="page_list">
+        <tr>
+            <td>id</td>
+            <td>Title</td>
+            <td>Options</td>
+        </tr>
+    {% for page in pages %}
+        <tr>
+            <td class="page_list_entry" data-name="idx">{{ page.id }}</td>
+            <td class="page_list_entry" data-name="title" contenteditable="true">{{ page.title }}</td>
+            <td>
+                <label>remove:
+                    <input class="page_list_entry" type="checkbox" name="remove"></label>
+                <button>edit</button>
+            </td>
+        </tr>
+    {% endfor %}
+    </table>
+    <button id="page_list_add_button">add</button>
+    <button id="page_list_save_button">save</button>
+{% endblock %}

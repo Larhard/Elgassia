@@ -63,8 +63,11 @@ ul.popup_menu_list {
 
 ul.popup_menu_list li {
     margin: 5px;
-    padding: 5px;
     border: 1px solid #000000;
+}
+
+.popup_entry {
+    padding: 5px;
 }
 
 ul.popup_menu_list li:hover {
