@@ -12,3 +12,11 @@ class PopupMenu(model_generics.MenuGeneric):
 
 class StandardPage(model_generics.PageGeneric):
     pass
+
+
+class Config(models.Model):
+    key = models.CharField(max_length=256)
+    value = models.CharField(max_length=256)
+
+    def __unicode__(self):
+        return "{}".format(self.key)
