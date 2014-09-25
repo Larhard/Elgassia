@@ -94,10 +94,10 @@ function page_list_save() {
     var remove = [];
 
     $(".page_list_entry[data-name*='idx']").each(function() {
-        idx.push($(this).html());
+        idx.push($(this).text());
     });
     $(".page_list_entry[data-name*='title']").each(function() {
-        title.push($(this).html())
+        title.push($(this).text())
     });
     $(".page_list_entry[name*='remove']").each(function() {
         remove.push($(this).prop("checked"));
@@ -121,6 +121,46 @@ function page_editor_save() {
 
 function button_href() {
     location.href = $(this).attr('data-href');
+}
+
+function config_editor_add() {
+    $("#config_editor_list").append(
+        '<tr>' +
+        '    <input type="hidden" class="config_editor_entry" name="idx" value="-1">' +
+        '    <td class="config_editor_entry" data-name="key" contenteditable="true"></td>' +
+        '    <td class="config_editor_entry" data-name="value" contenteditable="true"></td>' +
+        '    <td>' +
+        '        <label>remove:' +
+        '            <input class="config_editor_entry" type="checkbox" name="remove">' +
+        '        </label>' +
+        '    </td>' +
+        '</tr>'
+    )
+}
+function config_editor_save() {
+    var idx = [];
+    var key = [];
+    var value = [];
+    var remove = [];
+    $(".config_editor_entry[name*='idx']").each(function() {
+        idx.push($(this).val());
+    });
+    $(".config_editor_entry[data-name*='key']").each(function() {
+        key.push($(this).text());
+    });
+    $(".config_editor_entry[data-name*='value']").each(function() {
+        value.push($(this).text());
+    });
+    $(".config_editor_entry[name*='remove']").each(function() {
+        remove.push($(this).prop("checked"));
+    });
+
+    submit_and_redirect($(this).attr("data-url"), {
+        "idx[]": idx,
+        "key[]": key,
+        "value[]": value,
+        "remove[]": remove
+    })
 }
 
 $(document).ready(function() {
@@ -151,4 +191,6 @@ $(document).ready(function() {
     $("#page_list_save_button").click(page_list_save);
     $("#page_editor_save_button").click(page_editor_save);
     $("button.href").click(button_href);
+    $(".config_editor_add_button").click(config_editor_add);
+    $(".config_editor_save_button").click(config_editor_save);
 });

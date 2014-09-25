@@ -1,0 +1,31 @@
+{% extends 'main/base_generic.html' %}
+
+{% block title %}
+    {{ block.super }}
+    - Config Editor
+{% endblock %}
+
+{% block content %}
+    Config Editor
+    <table id="config_editor_list">
+        <tr>
+            <td>Key</td>
+            <td>Value</td>
+            <td>Options</td>
+        </tr>
+        {% for config in configs %}
+            <tr>
+                <input type="hidden" class="config_editor_entry" name="idx" value="{{ config.id }}">
+                <td class="config_editor_entry" data-name="key" contenteditable="true">{{ config.key }}</td>
+                <td class="config_editor_entry" data-name="value" contenteditable="true">{{ config.value }}</td>
+                <td>
+                    <label>remove:
+                        <input class="config_editor_entry" type="checkbox" name="remove">
+                    </label>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    <button class="config_editor_add_button">add</button>
+    <button class="config_editor_save_button" data-url="{% url 'main:config:config_editor_save' %}">save</button>
+{% endblock %}

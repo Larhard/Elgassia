@@ -4,7 +4,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import HttpResponse, render
 from django.shortcuts import render_to_response
 
-from main.models import MainMenu, StandardPage
+from main.models import MainMenu, StandardPage, Config
 
 
 @staff_member_required
@@ -52,7 +52,7 @@ def page_list_save(request):
     title = request.POST.getlist('title[]')
     remove = request.POST.getlist('remove[]')
 
-    for pos, entry in enumerate(zip(idx, remove, title)):
+    for entry in zip(idx, remove, title):
         if entry[0] == '-1':
             if entry[1] == 'true':
                 continue
@@ -86,5 +86,37 @@ def page_edit_save(request):
         page.save()
     except Exception as e:
         error += e.message
+    response = {'success': error == '', 'error': error}
+    return HttpResponse(json.dumps(response), content_type='application/json')
+
+
+def config_editor(request):
+    configs = Config.objects.all()
+    return render(request, 'main/config/config_editor.html', {
+        'configs': configs
+    })
+
+
+def config_editor_save(request):
+    error = ''
+
+    idx = request.POST.getlist('idx[]')
+    remove = request.POST.getlist('remove[]')
+    key = request.POST.getlist('key[]')
+    value = request.POST.getlist('value[]')
+
+    for entry in zip(idx, remove, key, value):
+        if entry[0] == "-1":
+            if entry[1] == 'true':
+                continue
+            k = Config()
+        else:
+            k = Config.objects.get(id=entry[0])
+            if entry[1] == 'true':
+                k.delete()
+                continue
+        k.key, k.value = entry[2:]
+        k.save()
+
     response = {'success': error == '', 'error': error}
     return HttpResponse(json.dumps(response), content_type='application/json')

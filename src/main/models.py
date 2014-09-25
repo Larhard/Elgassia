@@ -15,7 +15,7 @@ class StandardPage(model_generics.PageGeneric):
 
 
 class Config(models.Model):
-    key = models.CharField(max_length=256)
+    key = models.CharField(max_length=256, unique=True)
     value = models.CharField(max_length=256)
 
     def __unicode__(self):
