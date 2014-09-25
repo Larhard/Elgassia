@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.shortcuts import render_to_response
@@ -8,7 +8,7 @@ import json
 
 @ensure_csrf_cookie
 def home(request):
-    return render_to_response('main/home.html')
+    return render(request, 'main/home.html')
 
 
 def login_view(request):
@@ -21,6 +21,15 @@ def login_view(request):
         login(request, user)
     else:
         error += 'login or password incorrect'
+
+    response = {'success': error == '', 'error': error}
+    return HttpResponse(json.dumps(response), content_type='application/json')
+
+
+def logout_view(request):
+    error = ''
+
+    logout(request)
 
     response = {'success': error == '', 'error': error}
     return HttpResponse(json.dumps(response), content_type='application/json')

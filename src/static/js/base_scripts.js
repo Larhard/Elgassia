@@ -36,8 +36,8 @@ function main_menu_save() {
                 console.log("Successfully saved");
                 location.reload()
             } else {
-                console.log("Something went wrong");
-                alert("Something went wrong");
+                console.log(data['error']);
+                alert(data['error']);
             }
         }
     );
@@ -71,6 +71,23 @@ function main_menu_add_entry() {
     );
 }
 
+function logout_button() {
+    $.post(logout_url,
+        {
+            'csrfmiddlewaretoken': csrftoken
+        },
+        function(data) {
+            console.log(data);
+            if (data['success'] == true) {
+                location.reload()
+            } else {
+                console.log(data['error']);
+                alert(data['error']);
+            }
+        }
+    );
+}
+
 function login_button() {
     var login = $(".login_entry[name*='login']").val();
     var password = $(".login_entry[name*='password']").val();
@@ -79,14 +96,14 @@ function login_button() {
         {
             'csrfmiddlewaretoken': csrftoken,
             'login': login,
-            'password': password,
+            'password': password
         },
         function(data) {
             console.log(data);
             if (data['success'] == true) {
                 location.reload()
             } else {
-                console.log("Something went wrong");
+                console.log(data['error']);
                 alert(data['error']);
             }
         }
@@ -108,4 +125,13 @@ $(document).ready(function() {
     });
     $("#main_menu_add_entry_button").click(main_menu_add_entry);
     $("#login_button").click(login_button)
+    $("input.login_entry").keypress(function(key) {
+        if ((key.which && key.which == 13) || (key.keyCode && key.keyCode == 13)) {
+            $("#login_button").click();
+            return false;
+        } else {
+            return true;
+        }
+    });
+    $("#logout_button").click(logout_button)
 });
