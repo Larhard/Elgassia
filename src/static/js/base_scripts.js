@@ -1,6 +1,5 @@
 function main_menu_save() {
     var main_menu_list = $("#main_menu_list");
-    var entries = main_menu_list.find(".main_menu_entry_edit");
     var idx = [];
     var title = [];
     var dest_name = [];
@@ -30,8 +29,10 @@ function main_menu_save() {
             console.log(data);
             if (data['success'] == true) {
                 console.log("Successfully saved");
+                alert("Successfully saved");
             } else {
                 console.log("Something went wrong");
+                alert("Something went wrong");
             }
         }
     );

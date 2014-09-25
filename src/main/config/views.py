@@ -10,14 +10,15 @@ def save_main_menu(request):
 
     try:
         menu_db = MainMenu.objects
-        menu_order = request.POST.getlist('idx[]')
+        idx = request.POST.getlist('idx[]')
         title = request.POST.getlist('title[]')
         dest_name = request.POST.getlist('dest_name[]')
         dest_url = request.POST.getlist('dest_url[]')
 
-        for pos, entry in enumerate(zip(menu_order, title, dest_name, dest_url)):
+        for pos, entry in enumerate(zip(idx, title, dest_name, dest_url)):
             k = menu_db.get(id=entry[0])
-            k.position, k.title, k.dest_name, k.dest_url = entry
+            k.position = pos
+            k.title, k.dest_name, k.dest_url = entry[1:]
             k.save()
     except Exception as e:
         error = e.message
