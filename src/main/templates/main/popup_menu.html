@@ -3,7 +3,7 @@
         <div class="toggleable hidden popup_entry">
             <label>login: <input class="login_entry" type="text" name="login"></label>
             <label>password: <input class="login_entry" type="password" name="password"></label>
-            <button id="login_button">login</button>
+            <button id="login_button" data-url="{% url 'main:login' %}">login</button>
         </div>
         <div class="toggleable popup_entry">
             <button class="toggle_button">login</button>
@@ -11,7 +11,7 @@
     {% else %}
         <div class="toggleable popup_entry">
             Logged as {{ user.username }}
-            <button id="logout_button">logout</button>
+            <button id="logout_button" data-url="{% url 'main:logout' %}">logout</button>
         </div>
     {% endif %}
 </li>

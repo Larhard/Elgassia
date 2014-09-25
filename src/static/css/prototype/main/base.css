@@ -128,3 +128,7 @@ input {
 .align_right {
     text-align: right;
 }
+
+a {
+    color: #6c7589;
+}

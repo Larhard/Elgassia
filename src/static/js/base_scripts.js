@@ -21,7 +21,7 @@ function main_menu_save() {
         remove.push($(this).prop("checked"));
     });
 
-    submit_and_reload(main_menu_save_url,
+    submit_and_redirect($(this).attr("data-url"),
         {
             'idx[]': idx,
             'title[]': title,
@@ -60,14 +60,14 @@ function main_menu_add_entry() {
 }
 
 function logout_button() {
-    submit_and_reload(logout_url)
+    submit_and_redirect($(this).attr("data-url"))
 }
 
 function login_button() {
     var login = $(".login_entry[name*='login']").val();
     var password = $(".login_entry[name*='password']").val();
 
-    submit_and_reload(login_url, {"login": login, "password": password});
+    submit_and_redirect($(this).attr("data-url"), {"login": login, "password": password});
 }
 
 function page_list_add() {
@@ -98,11 +98,24 @@ function page_list_save() {
         remove.push($(this).prop("checked"));
     });
 
-    submit_and_reload(page_list_save_url, {
+    submit_and_redirect($(this).attr("data-url"), {
         'idx': idx,
         'title': title,
         'remove': remove
     })
+}
+
+function page_editor_save() {
+    var idx = $(".page_editor_entry[name*='idx']").val();
+    var content = $(".page_editor_entry[name*='content']").val();
+    submit_and_redirect($(this).attr("data-url"), {
+        'idx': idx,
+        'content': content
+    }, $(this).attr("data-redirect"))
+}
+
+function button_href() {
+    location.href = $(this).attr('data-href');
 }
 
 $(document).ready(function() {
@@ -131,5 +144,6 @@ $(document).ready(function() {
     $("#logout_button").click(logout_button);
     $("#page_list_add_button").click(page_list_add);
     $("#page_list_save_button").click(page_list_save);
-    $(".")
+    $("#page_editor_save_button").click(page_editor_save);
+    $("button.href").click(button_href);
 });

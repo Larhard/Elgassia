@@ -25,7 +25,7 @@ function find_first_children(containers, pattern) {
     return result;
 }
 
-function submit_and_reload(url, data) {
+function submit_and_redirect(url, data, redirect) {
     data = typeof data != 'undefined' ? data : {};
 
     data['csrfmiddlewaretoken'] = csrftoken;
@@ -34,7 +34,11 @@ function submit_and_reload(url, data) {
         function(data) {
             console.log(data);
             if (data['success'] == true) {
-                location.reload()
+                if (typeof redirect == 'undefined') {
+                    location.reload();
+                } else {
+                    location.href = redirect;
+                }
             } else {
                 console.log(data['error']);
                 alert(data['error']);

@@ -2,6 +2,7 @@ import json
 
 from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import HttpResponse, render
+from django.shortcuts import render_to_response
 
 from main.models import MainMenu, StandardPage
 
@@ -37,7 +38,7 @@ def save_main_menu(request):
 
 @staff_member_required
 def page_list(request):
-    return render(request, 'main/page_list.html', {
+    return render(request, 'main/config/page_list.html', {
         'pages': StandardPage.objects.all()
     })
 
@@ -66,3 +67,23 @@ def page_list_save(request):
     response = {'success': error == '', 'error': error}
     return HttpResponse(json.dumps(response), content_type='application/json')
 
+
+@staff_member_required
+def page_edit(request, idx):
+    page = StandardPage.objects.get(id=idx)
+    return render(request, 'main/config/page_edit.html', {'page': page})
+
+
+@staff_member_required
+def page_edit_save(request):
+    error = ''
+    try:
+        idx = request.POST['idx']
+        content = request.POST['content']
+        page = StandardPage.objects.get(id=idx)
+        page.content = content
+        page.save()
+    except Exception as e:
+        error += e.message
+    response = {'success': error == '', 'error': error}
+    return HttpResponse(json.dumps(response), content_type='application/json')

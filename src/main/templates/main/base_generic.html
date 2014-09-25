@@ -10,14 +10,6 @@
         {% block title %}{% title %}{% endblock %}
     </title>
     <link rel="stylesheet" type="text/css" href="{% static "css/prototype/main/base.css" %}">
-    <script type="text/javascript">
-        {% if user.is_staff %}
-            var main_menu_save_url = "{% url 'main:config:main_menu_save' %}";
-            var page_list_save_url = "{% url 'main:config:page_list_save' %}";
-        {% endif %}
-        var login_url = "{% url 'main:login' %}";
-        var logout_url = "{% url 'main:logout' %}";
-    </script>
     <script type="text/javascript" src="{% static "js/jquery.min.js" %}"></script>
     <script type="text/javascript" src="{% static "js/jquery-ui.min.js" %}"></script>
     <script type="text/javascript" src="{% static "js/common.js" %}"></script>
@@ -83,7 +75,7 @@
                     <div class="main_menu_config">
                         <button class="toggle_button sorting_button toggleable">edit</button>
                         <button id="main_menu_add_entry_button" class="toggleable hidden">add</button>
-                        <button id="main_menu_save_button" class="toggleable hidden">save</button>
+                        <button id="main_menu_save_button" class="toggleable hidden" data-url="{% url 'main:config:main_menu_save' %}">save</button>
                     </div>
                 {% endif %}
             </div>
