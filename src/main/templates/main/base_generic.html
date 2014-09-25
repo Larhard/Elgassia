@@ -10,6 +10,9 @@
         {% block title %}{% title %}{% endblock %}
     </title>
     <link rel="stylesheet" type="text/css" href="{% static "css/prototype/main/base.css" %}">
+    <script type="text/javascript">
+        var main_menu_save_url = "{% url 'main:config:main_menu_save' %}";
+    </script>
     <script type="text/javascript" src="{% static "js/jquery.min.js" %}"></script>
     <script type="text/javascript" src="{% static "js/jquery-ui.min.js" %}"></script>
     <script type="text/javascript" src="{% static "js/common.js" %}"></script>

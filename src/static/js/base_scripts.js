@@ -21,7 +21,7 @@ function main_menu_save() {
         remove.push($(this).prop("checked"));
     });
 
-    $.post("config/save_main_menu/",
+    $.post(main_menu_save_url,
         {
             'csrfmiddlewaretoken': csrftoken,
             'idx[]': idx,
