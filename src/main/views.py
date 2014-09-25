@@ -10,7 +10,10 @@ from main.models import StandardPage, Config
 
 @ensure_csrf_cookie
 def home(request):
-    return page_view(request, Config.objects.get(key='main_page').value)
+    try:
+        return page_view(request, Config.objects.get(key='main_page').value)
+    except ObjectDoesNotExist:
+        return page_view(request, -1)
 
 
 def login_view(request):
