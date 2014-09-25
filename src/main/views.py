@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.shortcuts import render_to_response
 from django.views.decorators.csrf import ensure_csrf_cookie
 import json
+from main.models import StandardPage
 
 
 @ensure_csrf_cookie
@@ -33,3 +34,10 @@ def logout_view(request):
 
     response = {'success': error == '', 'error': error}
     return HttpResponse(json.dumps(response), content_type='application/json')
+
+
+def page_view(request, idx):
+    page = StandardPage.objects.get(id=idx)
+    return render(request, 'main/page.html', {
+        'page': page,
+    })

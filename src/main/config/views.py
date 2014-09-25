@@ -14,11 +14,12 @@ def save_main_menu(request):
     menu_db = MainMenu.objects
     idx = request.POST.getlist('idx[]')
     title = request.POST.getlist('title[]')
+    dest_page = request.POST.getlist('dest_page[]')
     dest_name = request.POST.getlist('dest_name[]')
     dest_url = request.POST.getlist('dest_url[]')
     remove = request.POST.getlist('remove[]')
 
-    for pos, entry in enumerate(zip(idx, remove, title, dest_name, dest_url)):
+    for pos, entry in enumerate(zip(idx, remove, title, dest_page, dest_name, dest_url)):
         if entry[0] == "-1":
             if entry[1] == 'true':
                 continue
@@ -29,7 +30,7 @@ def save_main_menu(request):
                 k.delete()
                 continue
         k.position = pos
-        k.title, k.dest_name, k.dest_url = entry[2:]
+        k.title, k.dest_page, k.dest_name, k.dest_url = entry[2:]
         k.save()
 
     response = {'success': error == '', 'error': error}

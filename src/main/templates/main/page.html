@@ -1,0 +1,12 @@
+{% extends 'main/base_generic.html' %}
+
+{% block title %}
+    {{ block.super }}
+    - {{ page.title }}
+{% endblock %}
+
+{% block content %}
+    {% autoescape off %}
+        {{ page.content }}
+    {% endautoescape %}
+{% endblock %}

@@ -4,12 +4,16 @@ function main_menu_save() {
     var title = [];
     var dest_name = [];
     var dest_url = [];
+    var dest_page = [];
     var remove = [];
     main_menu_list.find("input[name*='idx']").each(function() {
         idx.push($(this).val());
     });
     main_menu_list.find("input[name*='title']").each(function() {
         title.push($(this).val());
+    });
+    main_menu_list.find("input[name*='dest_page']").each(function() {
+        dest_page.push($(this).val());
     });
     main_menu_list.find("input[name*='dest_name']").each(function() {
         dest_name.push($(this).val());
@@ -25,6 +29,7 @@ function main_menu_save() {
         {
             'idx[]': idx,
             'title[]': title,
+            'dest_page[]': dest_page,
             'dest_name[]': dest_name,
             'dest_url[]': dest_url,
             'remove[]': remove

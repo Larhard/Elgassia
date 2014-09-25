@@ -50,8 +50,12 @@ div.page_wrapper {
     display: table;
 }
 
-div.content {
+div.content_wrapper {
     height: 100%;
+}
+
+div.content {
+    padding: 10px;
 }
 
 ul.popup_menu_list {
