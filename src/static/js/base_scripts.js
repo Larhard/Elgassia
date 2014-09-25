@@ -186,7 +186,7 @@ $(document).ready(function() {
             return true;
         }
     });
-    $("#logout_button").click(logout_button);
+    $(".logout_button").click(logout_button);
     $("#page_list_add_button").click(page_list_add);
     $("#page_list_save_button").click(page_list_save);
     $("#page_editor_save_button").click(page_editor_save);

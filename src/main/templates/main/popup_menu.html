@@ -5,14 +5,12 @@
             <label>password: <input class="login_entry" type="password" name="password"></label>
             <button id="login_button" data-url="{% url 'main:login' %}">login</button>
         </div>
-        <div class="toggleable popup_entry">
-            <button class="toggle_button">login</button>
-        </div>
+        <div class="link toggleable block popup_entry toggle_button">Login</div>
     {% else %}
-        <div class="toggleable popup_entry">
+        <div class="popup_entry">
             Logged as {{ user.username }}
-            <button id="logout_button" data-url="{% url 'main:logout' %}">logout</button>
         </div>
+        <div class="link popup_entry logout_button" data-url="{% url 'main:logout' %}">Logout</div>
     {% endif %}
 </li>
 {% if user.is_staff %}

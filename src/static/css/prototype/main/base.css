@@ -136,3 +136,13 @@ input {
 a {
     color: #6c7589;
 }
+
+.popup_show_icon {
+    width: 24px;
+    height: 16px;
+    margin: 0 auto;
+}
+
+.link {
+    cursor: pointer;
+}
