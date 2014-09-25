@@ -6,8 +6,6 @@ import json
 def save_main_menu(request):
     error = ''
 
-    # TODO edit url's
-
     try:
         menu_db = MainMenu.objects
         idx = request.POST.getlist('idx[]')
@@ -31,7 +29,6 @@ def save_main_menu(request):
             k.save()
     except Exception as e:
         error = e.message
-
 
     response = {'success': error == '', 'error': error}
     return HttpResponse(json.dumps(response), content_type='application/json')

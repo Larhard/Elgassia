@@ -72,7 +72,8 @@ function main_menu_add_entry() {
 }
 
 function login_button() {
-    var login =
+    var login = $(".login_entry[name*='login']").val();
+    var password = $(".login_entry[name*='password']").val();
 
     $.post(login_url,
         {
@@ -86,7 +87,7 @@ function login_button() {
                 location.reload()
             } else {
                 console.log("Something went wrong");
-                alert("Something went wrong");
+                alert(data['error']);
             }
         }
     );
