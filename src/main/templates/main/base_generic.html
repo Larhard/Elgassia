@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head lang="{% language %}">
+{% csrf_token %}
     <meta charset="UTF-8">
     <title>
         {% block title %}{% title %}{% endblock %}
@@ -12,6 +13,7 @@
     <link rel="stylesheet" type="text/css" href="{% static "css/prototype/main/base.css" %}">
     <script type="text/javascript">
         var main_menu_save_url = "{% url 'main:config:main_menu_save' %}";
+        var login_url = "{% url 'main:login' %}"
     </script>
     <script type="text/javascript" src="{% static "js/jquery.min.js" %}"></script>
     <script type="text/javascript" src="{% static "js/jquery-ui.min.js" %}"></script>
@@ -30,18 +32,9 @@
         <div class="popup_menu_wrapper">
             <div class="popup_menu">
                 <ul id="popup_menu_list" class="popup_menu_list">
-                    {% get_popup_menu %}
-                    {% for i in popup_menu %}
-                        {% if i.dest_name %}
-                            <a href="{% url i.dest_name %}">
-                        {% elif i.dest_url %}
-                            <a href="{{ i.dest_url }}">
-                        {% endif %}
-                                <li>{{ i.title }}</li>
-                        {% if i.dest_name or i.dest_url %}
-                            </a>
-                        {% endif %}
-                    {% endfor %}
+                    {% block popup_menu %}
+                        {% include 'main/popup_menu.html' %}
+                    {% endblock %}
                 </ul>
                 <div id="popup_menu_hide_button" class="popup_menu_hide_button">
                     show
@@ -71,9 +64,9 @@
                             <div class="main_menu_entry toggleable toggleable_container hidden main_menu_entry_edit">
                                 <ul class="clean">
                                     <li><label>title:<br><input name="title" type="text" value="{{ i.title }}"></label></li>
-                                    <li class="toggleable hidden"><label>dest_name:<br><input name="dest_name" type="text" value="{{ i.dest_name }}"></label></li>
-                                    <li class="toggleable hidden"><label>dest_url:<br><input name="dest_url" type="text" value="{{ i.dest_url }}"></label></li>
-                                    <li class="toggleable hidden"><label>remove:<br><input type="checkbox" name="remove"></label></li>
+                                    <li class="toggleable hidden"><label>dest_name: <input name="dest_name" type="text" value="{{ i.dest_name }}"></label></li>
+                                    <li class="toggleable hidden"><label>dest_url: <input name="dest_url" type="text" value="{{ i.dest_url }}"></label></li>
+                                    <li class="toggleable hidden"><label>remove: <input type="checkbox" name="remove"></label></li>
                                     <input type="hidden" name="idx" value="{{ i.id }}">
                                     <li><div class="align_right"><button class="toggle_button">more</button></div></li>
                                 </ul>

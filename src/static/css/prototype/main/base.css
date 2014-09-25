@@ -118,8 +118,8 @@ ul.clean li {
     display: none;
 }
 
-div.main_menu_entry_edit input {
-    width: 97%;
+input {
+    max-width: 95%;
 }
 
 .align_right {

@@ -71,6 +71,27 @@ function main_menu_add_entry() {
     );
 }
 
+function login_button() {
+    var login =
+
+    $.post(login_url,
+        {
+            'csrfmiddlewaretoken': csrftoken,
+            'login': login,
+            'password': password,
+        },
+        function(data) {
+            console.log(data);
+            if (data['success'] == true) {
+                location.reload()
+            } else {
+                console.log("Something went wrong");
+                alert("Something went wrong");
+            }
+        }
+    );
+}
+
 $(document).ready(function() {
     $("#popup_menu_hide_button").click(function() {
         $("#popup_menu_list").slideToggle();
@@ -85,4 +106,5 @@ $(document).ready(function() {
         $(this).click(sorting_button)
     });
     $("#main_menu_add_entry_button").click(main_menu_add_entry);
+    $("#login_button").click(login_button)
 });
