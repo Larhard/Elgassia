@@ -1,10 +1,10 @@
 import json
 
-from django.contrib.admin.views.decorators import staff_member_required
 from django.db.utils import IntegrityError
 from django.shortcuts import HttpResponse, render
 
 from main.models import MainMenu, StandardPage, Config
+from main.utils.decorators import staff_member_required
 
 
 @staff_member_required
