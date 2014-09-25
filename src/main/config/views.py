@@ -90,6 +90,7 @@ def page_edit_save(request):
     return HttpResponse(json.dumps(response), content_type='application/json')
 
 
+@staff_member_required
 def config_editor(request):
     configs = Config.objects.all()
     return render(request, 'main/config/config_editor.html', {
@@ -97,6 +98,7 @@ def config_editor(request):
     })
 
 
+@staff_member_required
 def config_editor_save(request):
     error = ''
 
