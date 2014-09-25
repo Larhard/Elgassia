@@ -1,8 +1,10 @@
+from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import HttpResponse
 from main.models import MainMenu, PopupMenu
 import json
 
 
+@staff_member_required
 def save_main_menu(request):
     error = ''
 
