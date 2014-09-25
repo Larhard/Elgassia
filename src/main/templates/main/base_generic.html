@@ -70,6 +70,7 @@
                                     <li><label>title:<br><input name="title" type="text" value="{{ i.title }}"></label></li>
                                     <li><label>dest_name:<br><input name="dest_name" type="text" value="{{ i.dest_name }}"></label></li>
                                     <li><label>dest_url:<br><input name="dest_url" type="text" value="{{ i.dest_url }}"></label></li>
+                                    <li><label>remove:<br><input type="checkbox" name="remove"></label></li>
                                     <input type="hidden" name="idx" value="{{ i.id }}">
                                 </ul>
                             </div>
@@ -78,6 +79,7 @@
                 </ul>
                 <div class="main_menu_config">
                     <button class="simple_edit_button">edit</button>
+                    <button id="main_menu_add_entry_button" class="editable hidden">add</button>
                     <button id="main_menu_save_button" class="editable hidden">save</button>
                 </div>
             </div>
