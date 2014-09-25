@@ -6,7 +6,7 @@ from django.db import migrations
 def populate_config(apps, schema_editor):
     Config = apps.get_model('main', 'Config')
     default_config = {
-        'main_page': '1',
+        'main_page': '-1',
         'title': 'Title Undefined',
     }
     for key in default_config:
