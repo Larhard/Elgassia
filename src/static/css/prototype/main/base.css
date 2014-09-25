@@ -121,3 +121,7 @@ ul.clean li {
 div.main_menu_entry_edit input {
     width: 97%;
 }
+
+.align_right {
+    text-align: right;
+}

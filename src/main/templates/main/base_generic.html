@@ -46,41 +46,42 @@
             </div>
         </div>
         <div class="left_page">
-            <div class="main_menu_container editable_container">
+            <div class="main_menu_container toggleable_container sortable_container">
                 <ul id="main_menu_list" class="main_menu sortable">
                     {% get_main_menu %}
                     {% for i in main_menu %}
                         <li>
                             {% if i.dest_name %}
-                                <a class="block main_menu_entry editable" href="{% url i.dest_name %}">
+                                <a class="block main_menu_entry toggleable" href="{% url i.dest_name %}">
                                     {{ i.title }}
                                 </a>
                             {% elif i.dest_url %}
-                                <a class="block main_menu_entry editable" href="{{ i.dest_url }}">
+                                <a class="block main_menu_entry toggleable" href="{{ i.dest_url }}">
                                     {{ i.title }}
                                 </a>
                             {% else %}
-                                <div class="main_menu_entry editable">
+                                <div class="main_menu_entry toggleable">
                                     {{ i.title }}
                                 </div>
                             {% endif %}
 
-                            <div class="main_menu_entry editable hidden main_menu_entry_edit">
+                            <div class="main_menu_entry toggleable toggleable_container hidden main_menu_entry_edit">
                                 <ul class="clean">
                                     <li><label>title:<br><input name="title" type="text" value="{{ i.title }}"></label></li>
-                                    <li><label>dest_name:<br><input name="dest_name" type="text" value="{{ i.dest_name }}"></label></li>
-                                    <li><label>dest_url:<br><input name="dest_url" type="text" value="{{ i.dest_url }}"></label></li>
-                                    <li><label>remove:<br><input type="checkbox" name="remove"></label></li>
+                                    <li class="toggleable hidden"><label>dest_name:<br><input name="dest_name" type="text" value="{{ i.dest_name }}"></label></li>
+                                    <li class="toggleable hidden"><label>dest_url:<br><input name="dest_url" type="text" value="{{ i.dest_url }}"></label></li>
+                                    <li class="toggleable hidden"><label>remove:<br><input type="checkbox" name="remove"></label></li>
                                     <input type="hidden" name="idx" value="{{ i.id }}">
+                                    <li><div class="align_right"><button class="toggle_button">more</button></div></li>
                                 </ul>
                             </div>
                         </li>
                     {% endfor %}
                 </ul>
                 <div class="main_menu_config">
-                    <button class="simple_edit_button">edit</button>
-                    <button id="main_menu_add_entry_button" class="editable hidden">add</button>
-                    <button id="main_menu_save_button" class="editable hidden">save</button>
+                    <button class="toggle_button sorting_button toggleable">edit</button>
+                    <button id="main_menu_add_entry_button" class="toggleable hidden">add</button>
+                    <button id="main_menu_save_button" class="toggleable hidden">save</button>
                 </div>
             </div>
         </div>
