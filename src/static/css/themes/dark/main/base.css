@@ -3,13 +3,8 @@ body {
 }
 
 div {
-    border: 1px solid #000000;
     margin: 0;
     padding: 0;
-}
-
-div:hover {
-    background: rgba(0, 0, 0, 0.10);
 }
 
 div.main_wrapper {
@@ -17,15 +12,23 @@ div.main_wrapper {
     margin: auto;
 }
 
+div.page_wrapper {
+    margin: auto;
+    display: table;
+    background: #303030;
+}
+
 div.title_bar {
     height: 100px;
     text-align: center;
+    background: #101010;
 }
 
 div.popup_menu {
     width: 200px;
     min-height: 0;
     float: right;
+    background: #060606;
 }
 
 div.popup_menu_wrapper {
@@ -49,13 +52,9 @@ div.center_page {
     height: 100%;
 }
 
-div.page_wrapper {
-    margin: auto;
-    display: table;
-}
-
 div.content_wrapper {
     height: 100%;
+    background: #131313;
 }
 
 div.content {
@@ -71,7 +70,6 @@ ul.popup_menu_list {
 
 ul.popup_menu_list li {
     margin: 5px;
-    border: 1px solid #000000;
 }
 
 .popup_entry {
@@ -90,7 +88,7 @@ ul.main_menu {
 
 ul.main_menu li {
     margin: 20px 10px 20px -30px;
-    border: 1px solid #000000;
+    background: #060606;
 }
 
 ul.main_menu li:hover {
@@ -100,6 +98,7 @@ ul.main_menu li:hover {
 div.popup_menu_hide_button {
     text-align: center;
     height: 16px;
+    background: #000000;
 }
 
 .block {
