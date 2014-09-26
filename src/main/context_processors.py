@@ -4,7 +4,7 @@ from main.models import Config
 
 def theme(request):
     try:
-        default_theme = Config.objects.get(key='default_theme')
+        default_theme = Config.objects.get(key='default_theme').value
     except ObjectDoesNotExist:
         default_theme = 'prototype'
     active_theme = request.COOKIES.get('theme', default_theme)
