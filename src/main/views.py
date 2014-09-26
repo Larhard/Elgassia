@@ -48,3 +48,14 @@ def page_view(request, idx):
         })
     except ObjectDoesNotExist:
         return render(request, 'main/page_not_found.html')
+
+
+def change_theme(request):
+    error = ''
+
+    new_theme = request.POST['new_theme']
+
+    response = {'success': error == '', 'error': error}
+    result = HttpResponse(json.dumps(response), content_type='application/json')
+    result.set_cookie('theme', new_theme)
+    return result

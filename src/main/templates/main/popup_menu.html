@@ -1,3 +1,4 @@
+{% load main.themes %}
 <li class="toggleable_container">
     {% if not user.is_authenticated %}
         <div class="toggleable hidden popup_entry">
@@ -21,3 +22,18 @@
         <a class="block popup_entry" href="{% url 'main:config:config_editor' %}">Config Editor</a>
     </li>
 {% endif %}
+
+<li>
+    <label>
+        Theme:
+        <select id="theme_select" data-url="{% url 'main:change_theme' %}">
+            {% get_themes_list %}
+            {% for k in themes_list %}
+                <option value="{{ k }}"
+                        {% if k == active_theme %}selected="selected"{% endif %}>
+                    {{ k }}
+                </option>
+            {% endfor %}
+        </select>
+    </label>
+</li>

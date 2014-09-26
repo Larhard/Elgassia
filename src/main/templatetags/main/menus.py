@@ -1,13 +1,13 @@
 from django import template
 
-import main.models
+from main.models import MainMenu, PopupMenu
 
 register = template.Library()
 
 
 class PopupMenuNode(template.Node):
     def render(self, context):
-        context['popup_menu'] = main.models.PopupMenu.objects.order_by('position')
+        context['popup_menu'] = PopupMenu.objects.order_by('position')
         return ''
 
 
@@ -18,10 +18,11 @@ def get_popup_menu(parser, token):
 
 class MainMenuNode(template.Node):
     def render(self, context):
-        context['main_menu'] = main.models.MainMenu.objects.order_by('position')
+        context['main_menu'] = MainMenu.objects.order_by('position')
         return ''
 
 
 @register.tag()
 def get_main_menu(parser, token):
     return MainMenuNode()
+

@@ -163,6 +163,13 @@ function config_editor_save() {
     })
 }
 
+function theme_select_change() {
+    var new_theme = $(this).val();
+    submit_and_redirect($(this).attr("data-url"), {
+        'new_theme': new_theme
+    });
+}
+
 $(document).ready(function() {
     $("#popup_menu_hide_button").click(function() {
         $("#popup_menu_list").slideToggle();
@@ -193,4 +200,5 @@ $(document).ready(function() {
     $("button.href").click(button_href);
     $(".config_editor_add_button").click(config_editor_add);
     $(".config_editor_save_button").click(config_editor_save);
+    $("#theme_select").change(theme_select_change);
 });
