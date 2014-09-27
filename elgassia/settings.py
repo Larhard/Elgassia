@@ -21,9 +21,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = 'g*!b+gf-k1j53qo9&uaoz^$j6x4g2^8pzpyf5gjqf7%tam#e@q'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-TEMPLATE_DEBUG = True
+TEMPLATE_DEBUG = False
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
@@ -38,7 +38,11 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'main.context_processors.theme',
 )
 
-ALLOWED_HOSTS = []
+# should be changed in local_settings
+
+ALLOWED_HOSTS = [
+    '*'
+]
 
 
 # Application definition
@@ -79,6 +83,8 @@ DATABASES = {
     }
 }
 
+# use dj_database_url as default default
+
 try:
     import dj_database_url
     DATABASES['default'] = dj_database_url.config()
@@ -104,3 +110,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = ()
+
+try:
+    from local_settings import *
+except ImportError:
+    pass
