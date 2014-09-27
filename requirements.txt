@@ -3,3 +3,7 @@ django-jquery==1.9.1
 gunicorn
 dj-database-url
 dj-static
+django-toolbelt
+psycopg2
+static3
+wsgiref
