@@ -3,6 +3,7 @@ from django.contrib import admin
 from django.views.generic import RedirectView
 from django.core.urlresolvers import reverse_lazy
 
+import settings
 import main.urls
 
 urlpatterns = patterns('',
@@ -10,3 +11,7 @@ urlpatterns = patterns('',
                        url(r'^main/', include(main.urls, namespace='main')),
                        url(r'^$', RedirectView.as_view(url=reverse_lazy('main:home'))),
                        )
+
+urlpatterns += patterns('django.contrib.staticfiles.views',
+                        url(r'^static/(?P<path>.*)$', 'serve'),
+                        )
