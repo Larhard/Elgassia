@@ -1,18 +1,17 @@
+<script type="text/javascript">
+    function theme_select_change() {
+        var new_theme = $(this).val();
+        submit_and_redirect($(this).attr("data-url"), {
+            'new_theme': new_theme
+        });
+    }
+
+    $(document).on("change", ".theme_select", theme_select_change);
+</script>
+
 {% load main.themes %}
 <li class="toggleable_container">
-    {% if not user.is_authenticated %}
-        <div class="toggleable hidden popup_entry">
-            <label>login: <input class="login_entry" type="text" name="login"></label>
-            <label>password: <input class="login_entry" type="password" name="password"></label>
-            <button id="login_button" data-url="{% url 'main:login' %}">login</button>
-        </div>
-        <div class="link toggleable block popup_entry toggle_button">Login</div>
-    {% else %}
-        <div class="popup_entry">
-            Logged as {{ user.username }}
-        </div>
-        <div class="link popup_entry logout_button" data-url="{% url 'main:logout' %}">Logout</div>
-    {% endif %}
+    {% include 'main/login_form.html' %}
 </li>
 {% if user.is_staff %}
     <li>
@@ -23,10 +22,10 @@
     </li>
 {% endif %}
 
-<li>
+<li class="popup_entry">
     <label>
         Theme:
-        <select id="theme_select" data-url="{% url 'main:change_theme' %}">
+        <select class="theme_select" data-url="{% url 'main:change_theme' %}">
             {% get_themes_list %}
             {% for k in themes_list %}
                 <option value="{{ k }}"

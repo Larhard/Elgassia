@@ -1,5 +1,66 @@
 {% load main.menus %}
 
+<script type="text/javascript">
+    function main_menu_save() {
+        var main_menu_list = $("#main_menu_list");
+        var idx = [];
+        var title = [];
+        var dest_name = [];
+        var dest_url = [];
+        var dest_page = [];
+        var remove = [];
+        main_menu_list.find("input[name*='idx']").each(function() {
+            idx.push($(this).val());
+        });
+        main_menu_list.find("input[name*='title']").each(function() {
+            title.push($(this).val());
+        });
+        main_menu_list.find("input[name*='dest_page']").each(function() {
+            dest_page.push($(this).val());
+        });
+        main_menu_list.find("input[name*='dest_name']").each(function() {
+            dest_name.push($(this).val());
+        });
+        main_menu_list.find("input[name*='dest_url']").each(function() {
+            dest_url.push($(this).val());
+        });
+        main_menu_list.find("input[name*='remove']").each(function() {
+            remove.push($(this).prop("checked"));
+        });
+
+        submit_and_redirect($(this).attr("data-url"),
+                {
+                    'idx[]': idx,
+                    'title[]': title,
+                    'dest_page[]': dest_page,
+                    'dest_name[]': dest_name,
+                    'dest_url[]': dest_url,
+                    'remove[]': remove
+                });
+    }
+
+    function main_menu_add_entry() {
+        $("#main_menu_list").append(
+                        '<li>' +
+                        '    <div class="main_menu_entry editable main_menu_entry_edit toggleable_containter">' +
+                        '        <ul class="clean">' +
+                        '            <li><label>title:<br><input name="title" type="text"></label></li>' +
+                        '            <li class="toggleable"><label>dest_page: <input name="dest_page" type="text"></label></li>' +
+                        '            <li class="toggleable"><label>dest_name: <input name="dest_name" type="text"></label></li>' +
+                        '            <li class="toggleable"><label>dest_url: <input name="dest_url" type="text"></label></li>' +
+                        '            <li class="toggleable"><label>remove: <input type="checkbox" name="removed"></label></li>' +
+                        '            <input type="hidden" name="idx" value="-1">' +
+                        '            <li><div class="align_right"><button class="toggle_button">more</button></div></li>' +
+                        '        </ul>' +
+                        '    </div>' +
+                        '</li>'
+        );
+    }
+
+    $(document).on("click", "#main_menu_save_button", main_menu_save);
+    $(document).on("click", "#main_menu_add_entry_button", main_menu_add_entry);
+</script>
+
 {% get_main_menu %}
 {% for i in main_menu %}
     <li>

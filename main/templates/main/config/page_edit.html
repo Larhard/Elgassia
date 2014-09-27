@@ -1,5 +1,21 @@
 {% extends 'main/base_generic.html' %}
 
+{% block scripts %}
+    {{ block.super }}
+    <script type="text/javascript">
+        function page_editor_save() {
+            var idx = $(".page_editor_entry[name*='idx']").val();
+            var content = $(".page_editor_entry[name*='content']").val();
+            submit_and_redirect($(this).attr("data-url"), {
+                'idx': idx,
+                'content': content
+            }, $(this).attr("data-redirect"))
+        }
+
+        $(document).on("click", ".page_editor_save_button", page_editor_save)
+    </script>
+{% endblock %}
+
 {% block title %}
     {{ block.super }}
     - Page Editor
@@ -11,5 +27,5 @@
     <!--suppress HtmlFormInputWithoutLabel -->
     <textarea class="page_editor_entry" name="content">{{ page.content }}</textarea>
     <input type="hidden" class="page_editor_entry" name="idx" value="{{ page.id }}">
-    <button id="page_editor_save_button" data-url="{% url 'main:config:page_edit_save' %}" data-redirect="{% url 'main:config:page_list' %}">save</button>
+    <button class="page_editor_save_button" data-url="{% url 'main:config:page_edit_save' %}" data-redirect="{% url 'main:config:page_list' %}">save</button>
 {% endblock %}

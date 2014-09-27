@@ -1,0 +1,38 @@
+<script type="text/javascript">
+    function login_button() {
+        var login = $(".login_entry[name*='login']").val();
+        var password = $(".login_entry[name*='password']").val();
+
+        submit_and_redirect($(this).attr("data-url"), {"login": login, "password": password});
+    }
+
+    function logout_button() {
+        submit_and_redirect($(this).attr("data-url"))
+    }
+
+    $(document).on("click", "#login_button", login_button);
+    $(document).on("click", ".logout_button", logout_button);
+
+    $(document).on("keypress", "input.login_entry", function(key) {
+        if ((key.which && key.which == 13) || (key.keyCode && key.keyCode == 13)) {
+            $("#login_button").click();
+            return false;
+        } else {
+            return true;
+        }
+    });
+</script>
+
+{% if not user.is_authenticated %}
+    <div class="toggleable hidden popup_entry">
+        <label>login: <input class="login_entry" type="text" name="login"></label>
+        <label>password: <input class="login_entry" type="password" name="password"></label>
+        <button id="login_button" data-url="{% url 'main:login' %}">login</button>
+    </div>
+    <div class="link toggleable block popup_entry toggle_button">Login</div>
+{% else %}
+    <div class="popup_entry">
+        Logged as {{ user.username }}
+    </div>
+    <div class="link popup_entry logout_button" data-url="{% url 'main:logout' %}">Logout</div>
+{% endif %}

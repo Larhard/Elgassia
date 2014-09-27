@@ -5,6 +5,49 @@
     - Page List
 {% endblock %}
 
+{% block scripts %}
+    {{ block.super }}
+    <script type="text/javascript">
+        function page_list_add() {
+            $("#page_list").append(
+                            '<tr>' +
+                            '    <td class="page_list_entry" data-name="idx">-1</td>' +
+                            '    <td class="page_list_entry" data-name="title" contenteditable="true">None</td>' +
+                            '    <td>' +
+                            '        <label>remove:' +
+                            '            <input class="page_list_entry" type="checkbox" name="remove"></label>' +
+                            '    </td>' +
+                            '</tr>'
+            )
+        }
+
+        function page_list_save() {
+            var idx = [];
+            var title = [];
+            var remove = [];
+
+            $(".page_list_entry[data-name*='idx']").each(function() {
+                idx.push($(this).text());
+            });
+            $(".page_list_entry[data-name*='title']").each(function() {
+                title.push($(this).text())
+            });
+            $(".page_list_entry[name*='remove']").each(function() {
+                remove.push($(this).prop("checked"));
+            });
+
+            submit_and_redirect($(this).attr("data-url"), {
+                'idx': idx,
+                'title': title,
+                'remove': remove
+            })
+        }
+
+        $(document).on("click", ".page_list_add_button", page_list_add)
+        $(document).on("click", ".page_list_save_button", page_list_save)
+    </script>
+{% endblock %}
+
 {% block content %}
     Page List:
     <table id="page_list">
@@ -25,6 +68,6 @@
         </tr>
     {% endfor %}
     </table>
-    <button id="page_list_add_button">add</button>
-    <button id="page_list_save_button" data-url="{% url 'main:config:page_list_save' %}">save</button>
+    <button class="page_list_add_button">add</button>
+    <button class="page_list_save_button" data-url="{% url 'main:config:page_list_save' %}">save</button>
 {% endblock %}
