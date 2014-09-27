@@ -1,7 +1,18 @@
+{% load main.page_list %}
+{% get_page_list %}
+
 <div class="main_menu_entry toggleable toggleable_container {{ hidden }} main_menu_entry_edit">
     <ul class="clean">
         <li><label>title:<br><input name="title" type="text" value="{{ entry.title }}"></label></li>
-        <li class="toggleable {{ hidden }}"><label>dest_page: <input name="dest_page" type="text" value="{{ entry.dest_page }}"></label></li>
+        <li class="toggleable {{ hidden }}">
+            <label>dest_page {{ entry.dest_page }}: <select name="dest_page">
+                    <option value="">-------</option>
+                    {% for page in page_list %}
+                    <option value="{{ page.id }}" {% if entry.dest_page and entry.dest_page == page.id|slugify %}selected="selected"{% endif %}>{{ page.title }}</option>
+                    {% endfor %}
+                </select>
+            </label>
+        </li>
         <li class="toggleable {{ hidden }}"><label>dest_name: <input name="dest_name" type="text" value="{{ entry.dest_name }}"></label></li>
         <li class="toggleable {{ hidden }} }}"><label>dest_url: <input name="dest_url" type="text" value="{{ entry.dest_url }}"></label></li>
         <li class="toggleable {{ hidden }} }}"><label>remove: <input type="checkbox" name="remove"></label></li>
