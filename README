@@ -1,1 +1,4 @@
 Elgassia web page
+
+
+requirements.txt file is used by heroku, true requirements are in minimal_requirements.txt
