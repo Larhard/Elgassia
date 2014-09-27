@@ -15,10 +15,10 @@
 </li>
 {% if user.is_staff %}
     <li>
-        <a class="block popup_entry" href="{% url 'main:config:page_list' %}">Page List</a>
+        <a class="block popup_entry clickable" href="{% url 'main:config:page_list' %}">Page List</a>
     </li>
     <li>
-        <a class="block popup_entry" href="{% url 'main:config:config_editor' %}">Config Editor</a>
+        <a class="block popup_entry clickable" href="{% url 'main:config:config_editor' %}">Config Editor</a>
     </li>
 {% endif %}
 

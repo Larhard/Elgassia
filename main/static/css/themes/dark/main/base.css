@@ -1,38 +1,56 @@
 body {
-    color: #c2c2c2;
+    white-space: nowrap;
+    color: #c6c6c6;
+    background: #a0a0a0;
 }
 
-div {
-    margin: 0;
-    padding: 0;
+a {
+    color: #c6c6c6;
+}
+
+a:hover {
+    color: #ebebeb;
 }
 
 div.main_wrapper {
-    width: 1000px;
+    min-width: 650px;
+    width: 95%;
     margin: auto;
 }
 
 div.page_wrapper {
-    margin: auto;
-    display: table;
+    margin: 0 50px;
     background: #303030;
 }
 
+div.title_bar a {
+    text-decoration: none;
+}
+
 div.title_bar {
-    height: 100px;
+    min-height: 10px;
     text-align: center;
+    font-size: xx-large;
     background: #101010;
+    color: #ffffff;
+    padding: 25px;
+}
+
+div.popup_menu a {
+    text-decoration: none;
 }
 
 div.popup_menu {
     width: 200px;
     min-height: 0;
     float: right;
-    background: #060606;
+    background: #3b3b3b;
 }
 
 div.popup_menu_wrapper {
-    width: 850px;
+    white-space: normal;
+    min-width: 500px;
+    width: 80%;
     height: 0;
     position: absolute;
 }
@@ -45,11 +63,14 @@ div.left_page {
 }
 
 div.center_page {
-    width: 700px;
+    white-space: normal;
+    /*margin-right: 152px;*/
     display: inline-block;
     vertical-align: top;
     padding: 20px;
-    height: 100%;
+    width: -moz-calc(100% - 200px);
+    width: -webkit-calc(100% - 200px);
+    width: calc(100% - 200px);
 }
 
 div.content_wrapper {
@@ -58,7 +79,7 @@ div.content_wrapper {
 }
 
 div.content {
-    padding: 10px;
+    padding: 15px;
 }
 
 ul.popup_menu_list {
@@ -76,8 +97,12 @@ ul.popup_menu_list li {
     padding: 5px;
 }
 
-ul.popup_menu_list li:hover {
-    background: rgba(0, 0, 0, 0.10);
+ul.popup_menu_list li {
+    background: #232323;
+}
+
+ul.popup_menu_list .clickable:hover {
+    background: rgb(21, 21, 21);
 }
 
 ul.main_menu {
@@ -88,11 +113,16 @@ ul.main_menu {
 
 ul.main_menu li {
     margin: 20px 10px 20px -30px;
-    background: #060606;
+    background: #0c0c0c;
 }
 
-ul.main_menu li:hover {
-    background: rgba(0, 0, 0, 0.10);
+ul.main_menu a {
+    text-decoration: none;
+}
+
+.main_menu_entry:hover {
+    background: rgb(66, 66, 66);
+    color: #ebebeb;
 }
 
 div.popup_menu_hide_button {
@@ -136,14 +166,11 @@ input {
     text-align: right;
 }
 
-a {
-    color: #6c7589;
-}
-
 .popup_show_icon {
     width: 24px;
     height: 16px;
     margin: 0 auto;
+    background: #242424;
 }
 
 .link {
