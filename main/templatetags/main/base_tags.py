@@ -1,6 +1,8 @@
 from django import template
 from django.core.exceptions import ObjectDoesNotExist
+
 from main.models import Config
+
 
 register = template.Library()
 

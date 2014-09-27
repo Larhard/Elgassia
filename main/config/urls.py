@@ -1,4 +1,4 @@
-from django.conf.urls import patterns, include, url
+from django.conf.urls import patterns, url
 
 urlpatterns = patterns('main.config.views',
                        url(r'^save_main_menu/$', 'save_main_menu', name='main_menu_save'),

@@ -1,5 +1,6 @@
 function getCookie(name) {
     var cookieValue = null;
+    //noinspection JSValidateTypes
     if (document.cookie && document.cookie != '') {
         var cookies = document.cookie.split(';');
         for (var i = 0; i < cookies.length; i++) {

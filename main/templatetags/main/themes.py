@@ -3,6 +3,7 @@ import os
 
 from elgassia.settings import STATIC_ROOT
 
+
 register = template.Library()
 
 
@@ -17,6 +18,7 @@ class ThemesList(template.Node):
         return ''
 
 
+# noinspection PyUnusedLocal
 @register.tag
 def get_themes_list(parser, token):
     return ThemesList()

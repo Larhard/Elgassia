@@ -8,7 +8,8 @@
     <title>
         {% block title %}{% title %}{% endblock %}
     </title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/themes/'%}{{ active_theme }}/main/base.css">
+{#TODO check#}
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/themes/{{ active_theme }}/main/base.css">
     <script type="text/javascript" src="{% static "js/jquery.js" %}"></script>
     <script type="text/javascript" src="{% static "js/jquery-ui.min.js" %}"></script>
     <script type="text/javascript" src="{% static "js/common.js" %}"></script>

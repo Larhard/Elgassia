@@ -11,6 +11,7 @@ class MainMenuNode(template.Node):
         return ''
 
 
+# noinspection PyUnusedLocal
 @register.tag()
 def get_main_menu(parser, token):
     return MainMenuNode()

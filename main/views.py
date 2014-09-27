@@ -1,10 +1,11 @@
+import json
+
 from django.contrib.auth import authenticate, login, logout
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse
 from django.shortcuts import render
-from django.shortcuts import render_to_response
 from django.views.decorators.csrf import ensure_csrf_cookie
-import json
+
 from main.models import StandardPage, Config
 
 
