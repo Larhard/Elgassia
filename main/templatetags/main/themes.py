@@ -1,7 +1,7 @@
 from django import template
 import os
 
-from elgassia.settings import STATICFILES_DIRS
+from elgassia.settings import STATIC_ROOT
 
 register = template.Library()
 
@@ -9,11 +9,10 @@ register = template.Library()
 class ThemesList(template.Node):
     def render(self, context):
         themes = []
-        for d in STATICFILES_DIRS:
-            try:
-                themes += os.listdir(os.path.join(d, 'css/themes'))
-            except OSError:
-                pass
+        try:
+            themes += os.listdir(os.path.join(STATIC_ROOT, 'css/themes'))
+        except OSError:
+            pass
         context['themes_list'] = themes
         return ''
 
