@@ -1,5 +1,4 @@
 {% load main.base_tags %}
-{% load main.menus %}
 {% load staticfiles %}
 
 <!DOCTYPE html>
@@ -25,13 +24,13 @@
     </div>
     <div class="page_wrapper">
         <div class="popup_menu_wrapper">
-            <div class="popup_menu">
-                <ul id="popup_menu_list" class="popup_menu_list">
+            <div class="popup_menu slidable_container">
+                <ul class="slidable popup_menu_list">
                     {% block popup_menu %}
                         {% include 'main/popup_menu.html' %}
                     {% endblock %}
                 </ul>
-                <div id="popup_menu_hide_button" class="popup_menu_hide_button">
+                <div class="slide_button popup_menu_hide_button">
                     <div class="popup_show_icon"></div>
                 </div>
             </div>
@@ -39,44 +38,9 @@
         <div class="left_page">
             <div class="main_menu_container toggleable_container sortable_container">
                 <ul id="main_menu_list" class="main_menu sortable">
-                    {% get_main_menu %}
-                    {% for i in main_menu %}
-                        <li>
-                            {% if i.dest_page %}
-                                {% url 'main:page' i.dest_page as u %}
-                                <a class="block main_menu_entry toggleable" href="{{ u }}">
-                                    {{ i.title }}
-                                </a>
-                            {% elif i.dest_name %}
-                                {% url i.dest_name as u %}
-                                <a class="block main_menu_entry toggleable" href="{{ u }}">
-                                    {{ i.title }}
-                                </a>
-                            {% elif i.dest_url %}
-                                <a class="block main_menu_entry toggleable" href="{{ i.dest_url }}">
-                                    {{ i.title }}
-                                </a>
-                            {% else %}
-                                <div class="main_menu_entry toggleable">
-                                    {{ i.title }}
-                                </div>
-                            {% endif %}
-
-                            {% if user.is_staff %}
-                                <div class="main_menu_entry toggleable toggleable_container hidden main_menu_entry_edit">
-                                    <ul class="clean">
-                                        <li><label>title:<br><input name="title" type="text" value="{{ i.title }}"></label></li>
-                                        <li class="toggleable hidden"><label>dest_page: <input name="dest_page" type="text" value="{{ i.dest_page }}"></label></li>
-                                        <li class="toggleable hidden"><label>dest_name: <input name="dest_name" type="text" value="{{ i.dest_name }}"></label></li>
-                                        <li class="toggleable hidden"><label>dest_url: <input name="dest_url" type="text" value="{{ i.dest_url }}"></label></li>
-                                        <li class="toggleable hidden"><label>remove: <input type="checkbox" name="remove"></label></li>
-                                        <input type="hidden" name="idx" value="{{ i.id }}">
-                                        <li><div class="align_right"><button class="toggle_button">more</button></div></li>
-                                    </ul>
-                                </div>
-                            {% endif %}
-                        </li>
-                    {% endfor %}
+                    {% block main_menu %}
+                        {% include 'main/main_menu.html' %}
+                    {% endblock %}
                 </ul>
                 {% if user.is_staff %}
                     <div class="main_menu_config">

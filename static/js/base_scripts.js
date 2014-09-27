@@ -36,28 +36,30 @@ function main_menu_save() {
         });
 }
 
+function slide_button() {
+    find_first_children($(this).closest(".slidable_container"), ".slidable").slideToggle();
+}
+
 function toggle_button() {
-    find_first_children($(this).closest(".toggleable_container"), ".toggleable").each(function() {
-        $(this).toggle();
-    });
+    find_first_children($(this).closest(".toggleable_container"), ".toggleable").toggle();
 }
 
 function sorting_button() {
-    find_first_children($(this).closest(".sortable_container"), ".sortable").each(function() {
-        $(this).sortable();
-    });
+    find_first_children($(this).closest(".sortable_container"), ".sortable").sortable();
 }
 
 function main_menu_add_entry() {
     $("#main_menu_list").append(
         '<li>' +
-        '    <div class="main_menu_entry editable main_menu_entry_edit">' +
+        '    <div class="main_menu_entry editable main_menu_entry_edit toggleable_containter">' +
         '        <ul class="clean">' +
         '            <li><label>title:<br><input name="title" type="text"></label></li>' +
-        '            <li><label>dest_name:<br><input name="dest_name" type="text"></label></li>' +
-        '            <li><label>dest_url:<br><input name="dest_url" type="text"></label></li>' +
-        '            <li><label>remove: <input type="checkbox" name="removed"></label></li>' +
+        '            <li class="toggleable"><label>dest_page: <input name="dest_page" type="text"></label></li>' +
+        '            <li class="toggleable"><label>dest_name: <input name="dest_name" type="text"></label></li>' +
+        '            <li class="toggleable"><label>dest_url: <input name="dest_url" type="text"></label></li>' +
+        '            <li class="toggleable"><label>remove: <input type="checkbox" name="removed"></label></li>' +
         '            <input type="hidden" name="idx" value="-1">' +
+        '            <li><div class="align_right"><button class="toggle_button">more</button></div></li>' +
         '        </ul>' +
         '    </div>' +
         '</li>'
@@ -171,18 +173,13 @@ function theme_select_change() {
 }
 
 $(document).ready(function() {
-    $("#popup_menu_hide_button").click(function() {
-        $("#popup_menu_list").slideToggle();
-    });
+    $(document).on("click", ".slide_button", slide_button);
 
     $("#main_menu_save_button").click(main_menu_save);
 
-    $(".toggle_button").each(function() {
-        $(this).click(toggle_button)
-    });
-    $(".sorting_button").each(function() {
-        $(this).click(sorting_button)
-    });
+    $(document).on("click", ".toggle_button", toggle_button);
+    $(document).on("click", ".sorting_button", sorting_button);
+
     $("#main_menu_add_entry_button").click(main_menu_add_entry);
     $("#login_button").click(login_button);
     $("input.login_entry").keypress(function(key) {
