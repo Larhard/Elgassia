@@ -40,21 +40,11 @@
     }
 
     function main_menu_add_entry() {
+        {% spaceless %}
         $("#main_menu_list").append(
-                        '<li>' +
-                        '    <div class="main_menu_entry editable main_menu_entry_edit toggleable_containter">' +
-                        '        <ul class="clean">' +
-                        '            <li><label>title:<br><input name="title" type="text"></label></li>' +
-                        '            <li class="toggleable"><label>dest_page: <input name="dest_page" type="text"></label></li>' +
-                        '            <li class="toggleable"><label>dest_name: <input name="dest_name" type="text"></label></li>' +
-                        '            <li class="toggleable"><label>dest_url: <input name="dest_url" type="text"></label></li>' +
-                        '            <li class="toggleable"><label>remove: <input type="checkbox" name="removed"></label></li>' +
-                        '            <input type="hidden" name="idx" value="-1">' +
-                        '            <li><div class="align_right"><button class="toggle_button">more</button></div></li>' +
-                        '        </ul>' +
-                        '    </div>' +
-                        '</li>'
+                '<li>{% include 'main/main_menu/edit_entry.html' %}</li>'
         );
+        {% endspaceless %}
     }
 
     $(document).on("click", "#main_menu_save_button", main_menu_save);
@@ -62,40 +52,32 @@
 </script>
 
 {% get_main_menu %}
-{% for i in main_menu %}
+{% for entry in main_menu %}
     <li>
-        {% if i.dest_page %}
-            {% url 'main:page' i.dest_page as u %}
+        {% if entry.dest_page %}
+            {% url 'main:page' entry.dest_page as u %}
             <a class="block main_menu_entry toggleable" href="{{ u }}">
-                {{ i.title }}
+                {{ entry.title }}
             </a>
-        {% elif i.dest_name %}
+        {% elif entry.dest_name %}
             {% url i.dest_name as u %}
             <a class="block main_menu_entry toggleable" href="{{ u }}">
-                {{ i.title }}
+                {{ entry.title }}
             </a>
-        {% elif i.dest_url %}
-            <a class="block main_menu_entry toggleable" href="{{ i.dest_url }}">
-                {{ i.title }}
+        {% elif entry.dest_url %}
+            <a class="block main_menu_entry toggleable" href="{{ entry.dest_url }}">
+                {{ entry.title }}
             </a>
         {% else %}
             <div class="main_menu_entry toggleable">
-                {{ i.title }}
+                {{ entry.title }}
             </div>
         {% endif %}
 
         {% if user.is_staff %}
-            <div class="main_menu_entry toggleable toggleable_container hidden main_menu_entry_edit">
-                <ul class="clean">
-                    <li><label>title:<br><input name="title" type="text" value="{{ i.title }}"></label></li>
-                    <li class="toggleable hidden"><label>dest_page: <input name="dest_page" type="text" value="{{ i.dest_page }}"></label></li>
-                    <li class="toggleable hidden"><label>dest_name: <input name="dest_name" type="text" value="{{ i.dest_name }}"></label></li>
-                    <li class="toggleable hidden"><label>dest_url: <input name="dest_url" type="text" value="{{ i.dest_url }}"></label></li>
-                    <li class="toggleable hidden"><label>remove: <input type="checkbox" name="remove"></label></li>
-                    <input type="hidden" name="idx" value="{{ i.id }}">
-                    <li><div class="align_right"><button class="toggle_button">more</button></div></li>
-                </ul>
-            </div>
+            {% with hidden='hidden' %}
+            {% include 'main/main_menu/edit_entry.html' %}
+            {% endwith %}
         {% endif %}
     </li>
 {% endfor %}

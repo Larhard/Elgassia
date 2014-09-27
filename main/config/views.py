@@ -3,6 +3,7 @@ import json
 from django.db.utils import IntegrityError
 from django.shortcuts import HttpResponse, render
 
+from elgassia.settings import DEBUG
 from main.models import MainMenu, StandardPage, Config
 from main.utils.decorators import staff_member_required
 
@@ -11,27 +12,34 @@ from main.utils.decorators import staff_member_required
 def save_main_menu(request):
     error = ''
 
-    menu_db = MainMenu.objects
-    idx = request.POST.getlist('idx[]')
-    title = request.POST.getlist('title[]')
-    dest_page = request.POST.getlist('dest_page[]')
-    dest_name = request.POST.getlist('dest_name[]')
-    dest_url = request.POST.getlist('dest_url[]')
-    remove = request.POST.getlist('remove[]')
+    try:
+        menu_db = MainMenu.objects
+        idx = request.POST.getlist('idx[]')
+        title = request.POST.getlist('title[]')
+        dest_page = request.POST.getlist('dest_page[]')
+        dest_name = request.POST.getlist('dest_name[]')
+        dest_url = request.POST.getlist('dest_url[]')
+        remove = request.POST.getlist('remove[]')
 
-    for pos, entry in enumerate(zip(idx, remove, title, dest_page, dest_name, dest_url)):
-        if entry[0] == "-1":
-            if entry[1] == 'true':
-                continue
-            k = MainMenu()
+        for pos, entry in enumerate(zip(idx, remove, title, dest_page, dest_name, dest_url)):
+            if entry[0] == "-1":
+                if entry[1] == 'true':
+                    continue
+                k = MainMenu()
+            else:
+                k = menu_db.get(id=entry[0])
+                if entry[1] == 'true':
+                    k.delete()
+                    continue
+            k.position = pos
+            k.title, k.dest_page, k.dest_name, k.dest_url = entry[2:]
+            k.save()
+    except Exception as e:
+        if DEBUG:
+            error += str(e)
+            error += str(list(zip(idx, remove, title, dest_page, dest_name, dest_url)))
         else:
-            k = menu_db.get(id=entry[0])
-            if entry[1] == 'true':
-                k.delete()
-                continue
-        k.position = pos
-        k.title, k.dest_page, k.dest_name, k.dest_url = entry[2:]
-        k.save()
+            error += 'Saving Error'
 
     response = {'success': error == '', 'error': error}
     return HttpResponse(json.dumps(response), content_type='application/json')
