@@ -1,3 +1,5 @@
 Django==1.7
 django-jquery==1.9.1
 gunicorn
+dj-database-url
+dj-static
