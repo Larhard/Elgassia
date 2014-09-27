@@ -5,7 +5,6 @@
         var main_menu_list = $("#main_menu_list");
         var idx = [];
         var title = [];
-        var dest_name = [];
         var dest_url = [];
         var dest_page = [];
         var remove = [];
@@ -17,9 +16,6 @@
         });
         main_menu_list.find("select[name*='dest_page']").each(function() {
             dest_page.push($(this).val());
-        });
-        main_menu_list.find("input[name*='dest_name']").each(function() {
-            dest_name.push($(this).val());
         });
         main_menu_list.find("input[name*='dest_url']").each(function() {
             dest_url.push($(this).val());
@@ -33,7 +29,6 @@
                     'idx[]': idx,
                     'title[]': title,
                     'dest_page[]': dest_page,
-                    'dest_name[]': dest_name,
                     'dest_url[]': dest_url,
                     'remove[]': remove
                 });
@@ -56,11 +51,6 @@
     <li>
         {% if entry.dest_page %}
             {% url 'main:page' entry.dest_page as u %}
-            <a class="block main_menu_entry toggleable" href="{{ u }}">
-                {{ entry.title }}
-            </a>
-        {% elif entry.dest_name %}
-            {% url i.dest_name as u %}
             <a class="block main_menu_entry toggleable" href="{{ u }}">
                 {{ entry.title }}
             </a>

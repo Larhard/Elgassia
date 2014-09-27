@@ -15,7 +15,6 @@
                 </select>
             </label>
         </li>
-        <li class="toggleable {{ hidden }}"><label>dest_name: <input name="dest_name" type="text" value="{{ entry.dest_name }}"></label></li>
         <li class="toggleable {{ hidden }} }}"><label>dest_url: <input name="dest_url" type="text" value="{{ entry.dest_url }}"></label></li>
         <li class="toggleable {{ hidden }} }}"><label>remove: <input type="checkbox" name="remove"></label></li>
         <input type="hidden" name="idx" value="{% if entry.id %}{{ entry.id }}{% else %}-1{% endif %}">
