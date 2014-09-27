@@ -9,4 +9,9 @@
     {% autoescape off %}
         {{ page.content }}
     {% endautoescape %}
+    {% if user.is_staff %}
+        <div class="align_right">
+            <button class="href" data-href="{% url 'main:config:page_edit' idx=page.id %}">edit</button>
+        </div>
+    {% endif %}
 {% endblock %}

@@ -64,7 +64,6 @@ div.left_page {
 
 div.center_page {
     white-space: normal;
-    /*margin-right: 152px;*/
     display: inline-block;
     vertical-align: top;
     padding: 20px;
@@ -131,39 +130,8 @@ div.popup_menu_hide_button {
     background: #000000;
 }
 
-.block {
-    display: block;
-}
-
 .main_menu_entry {
     padding: 10px
-}
-
-div.main_menu_config {
-    text-align: right;
-}
-
-ul.clean {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-ul.clean li {
-    margin: 0;
-    padding: 0;
-}
-
-.hidden {
-    display: none;
-}
-
-input {
-    max-width: 95%;
-}
-
-.align_right {
-    text-align: right;
 }
 
 .popup_show_icon {
@@ -173,6 +141,8 @@ input {
     background: #242424;
 }
 
-.link {
-    cursor: pointer;
+textarea.page_editor_entry {
+    width: 100%;
+    max-width: 100%;
+    min-height: 300px;
 }

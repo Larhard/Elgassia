@@ -8,6 +8,7 @@
     <title>
         {% block title %}{% title %}{% endblock %}
     </title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/common.css' %}">
     <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/themes/{{ active_theme }}/main/base.css">
     <script type="text/javascript" src="{% static "js/jquery.js" %}"></script>
     <script type="text/javascript" src="{% static "js/jquery-ui.min.js" %}"></script>
@@ -39,18 +40,9 @@
         </div>
         <div class="left_page">
             <div class="main_menu_container toggleable_container sortable_container">
-                <ul id="main_menu_list" class="main_menu sortable">
-                    {% block main_menu %}
-                        {% include 'main/main_menu.html' %}
-                    {% endblock %}
-                </ul>
-                {% if user.is_staff %}
-                    <div class="main_menu_config">
-                        <button class="toggle_button sorting_button toggleable">edit</button>
-                        <button id="main_menu_add_entry_button" class="toggleable hidden">add</button>
-                        <button id="main_menu_save_button" class="toggleable hidden" data-url="{% url 'main:config:main_menu_save' %}">save</button>
-                    </div>
-                {% endif %}
+                {% block main_menu %}
+                    {% include 'main/main_menu.html' %}
+                {% endblock %}
             </div>
         </div>
         <div class="center_page">
