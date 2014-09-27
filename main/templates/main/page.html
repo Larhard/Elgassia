@@ -11,7 +11,7 @@
     {% endautoescape %}
     {% if user.is_staff %}
         <div class="align_right">
-            <button class="href" data-href="{% url 'main:config:page_edit' idx=page.id %}">edit</button>
+            <button class="href" data-href="{% url 'main:config:page_edit' idx=page.id %}?next={{ request.path }}">edit</button>
         </div>
     {% endif %}
 {% endblock %}

@@ -27,5 +27,5 @@
     <!--suppress HtmlFormInputWithoutLabel -->
     <textarea class="page_editor_entry" name="content">{{ page.content }}</textarea>
     <input type="hidden" class="page_editor_entry" name="idx" value="{{ page.id }}">
-    <button class="page_editor_save_button" data-url="{% url 'main:config:page_edit_save' %}" data-redirect="{% url 'main:config:page_list' %}">save</button>
+    <button class="page_editor_save_button" data-url="{% url 'main:config:page_edit_save' %}" data-redirect="{{ next_page }}">save</button>
 {% endblock %}

@@ -1,4 +1,5 @@
 import json
+from django.core.urlresolvers import reverse
 
 from django.db.utils import IntegrityError
 from django.shortcuts import HttpResponse, render
@@ -78,7 +79,11 @@ def page_list_save(request):
 @staff_member_required
 def page_edit(request, idx):
     page = StandardPage.objects.get(id=idx)
-    return render(request, 'main/config/page_edit.html', {'page': page})
+
+    next_page = request.GET.get('next', '')
+    next_page = next_page or reverse('main:home')
+
+    return render(request, 'main/config/page_edit.html', {'page': page, 'next_page': next_page})
 
 
 @staff_member_required

@@ -63,7 +63,7 @@
             <td>
                 <label>remove:
                     <input class="page_list_entry" type="checkbox" name="remove"></label>
-                <button class="href" data-href="{% url 'main:config:page_edit' idx=page.id %}">edit</button>
+                <button class="href" data-href="{% url 'main:config:page_edit' idx=page.id %}?next={{ request.path }}">edit</button>
             </td>
         </tr>
     {% endfor %}
