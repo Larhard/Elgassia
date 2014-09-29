@@ -10,29 +10,38 @@
 </script>
 
 {% load main.themes %}
-<li class="toggleable_container">
-    {% include 'main/login_form.html' %}
-</li>
-{% if user.is_staff %}
-    <li>
-        <a class="block popup_entry clickable" href="{% url 'main:config:page_list' %}">Page List</a>
-    </li>
-    <li>
-        <a class="block popup_entry clickable" href="{% url 'main:config:config_editor' %}">Config Editor</a>
-    </li>
-{% endif %}
+<div class="popup_menu_wrapper">
+    <div class="popup_menu slidable_container">
+        <ul class="slidable popup_menu_list">
+            <li class="toggleable_container">
+                {% include 'main/login_form.html' %}
+            </li>
+            {% if user.is_staff %}
+                <li>
+                    <a class="block popup_entry clickable" href="{% url 'main:config:page_list' %}">Page List</a>
+                </li>
+                <li>
+                    <a class="block popup_entry clickable" href="{% url 'main:config:config_editor' %}">Config Editor</a>
+                </li>
+            {% endif %}
 
-<li class="popup_entry">
-    <label>
-        Theme:
-        <select class="theme_select" data-url="{% url 'main:change_theme' %}">
-            {% get_themes_list %}
-            {% for k in themes_list %}
-                <option value="{{ k }}"
-                        {% if k == active_theme %}selected="selected"{% endif %}>
-                    {{ k }}
-                </option>
-            {% endfor %}
-        </select>
-    </label>
-</li>
+            <li class="popup_entry">
+                <label>
+                    Theme:
+                    <select class="theme_select" data-url="{% url 'main:change_theme' %}">
+                        {% get_themes_list %}
+                        {% for k in themes_list %}
+                            <option value="{{ k }}"
+                                    {% if k == active_theme %}selected="selected"{% endif %}>
+                                {{ k }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </label>
+            </li>
+        </ul>
+    <div class="slide_button popup_menu_hide_button link">
+        <div class="popup_show_icon"></div>
+    </div>
+</div>
+</div>

@@ -142,6 +142,10 @@ div.popup_menu_hide_button {
     background: #242424;
 }
 
+.popup_show_icon:hover {
+    background: #656565;
+}
+
 textarea.page_editor_entry {
     width: 100%;
     max-width: 100%;
