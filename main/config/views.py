@@ -41,7 +41,6 @@ def main_menu_save(request):
                 entry[3] = dest_page.id
 
             k.title, k.dest_page, k.dest_url = entry[2:]
-            print(entry)
             k.save()
     except Exception as e:
         if DEBUG:
@@ -101,8 +100,10 @@ def page_edit_save(request):
     try:
         idx = request.POST['idx']
         content = request.POST['content']
+        title = request.POST['title']
         page = StandardPage.objects.get(id=idx)
         page.content = content
+        page.title = title
         page.save()
     except Exception as e:
         error += e.message

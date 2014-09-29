@@ -6,9 +6,11 @@
         function page_editor_save() {
             var idx = $(".page_editor_entry[name*='idx']").val();
             var content = $(".page_editor_entry[name*='content']").val();
+            var title = $(".page_editor_entry[data-name*='title']").text();
             submit_and_redirect($(this).attr("data-url"), {
                 'idx': idx,
-                'content': content
+                'content': content,
+                'title': title
             }, $(this).attr("data-redirect"))
         }
 
@@ -22,7 +24,7 @@
 {% endblock %}
 
 {% block content %}
-    {{ page.title }}
+    Title: <span contenteditable="true" data-name="title" class="page_editor_entry">{{ page.title }}</span>
     <br>
     <!--suppress HtmlFormInputWithoutLabel -->
     <textarea class="page_editor_entry" name="content">{{ page.content }}</textarea>
