@@ -10,7 +10,7 @@ from main.utils.decorators import staff_member_required
 
 
 @staff_member_required
-def save_main_menu(request):
+def main_menu_save(request):
     error = ''
 
     try:
@@ -22,7 +22,7 @@ def save_main_menu(request):
         remove = request.POST.getlist('remove[]')
 
         for pos, entry in enumerate(zip(idx, remove, title, dest_page, dest_url)):
-            if entry[0] == "-1":
+            if entry[0] == '-1':
                 if entry[1] == 'true':
                     continue
                 k = MainMenu()
@@ -32,7 +32,16 @@ def save_main_menu(request):
                     k.delete()
                     continue
             k.position = pos
+
+            if entry[3] == 'new':
+                dest_page = StandardPage()
+                dest_page.title = entry[2]
+                dest_page.save()
+                entry = list(entry)
+                entry[3] = dest_page.id
+
             k.title, k.dest_page, k.dest_url = entry[2:]
+            print(entry)
             k.save()
     except Exception as e:
         if DEBUG:

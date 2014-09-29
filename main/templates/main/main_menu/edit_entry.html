@@ -9,6 +9,9 @@
         <li class="toggleable {{ hidden }}">
             <label>destination page: <select name="dest_page">
                     <option value="">-------</option>
+                    <option value="new">New Page</option>
+                    <option disabled="disabled">custom URL</option>
+                    <option disabled="disabled">existing pages:</option>
                     {% for page in page_list %}
                     <option value="{{ page.id }}" {% if entry.dest_page and entry.dest_page == page.id|slugify %}selected="selected"{% endif %}>{{ page.title }}</option>
                     {% endfor %}
