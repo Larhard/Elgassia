@@ -1,16 +1,13 @@
 {% load main.page_list %}
 {% get_page_list %}
 
-{# TODO type select #}
-
 <div class="main_menu_entry toggleable toggleable_container {{ hidden }} main_menu_entry_edit">
     <ul class="clean">
         <li><label>title:<br><input name="title" type="text" value="{{ entry.title }}"></label></li>
         <li class="toggleable {{ hidden }}">
             <label>destination page: <select name="dest_page">
-                    <option value="">-------</option>
+                    <option value="">custom URL</option>
                     <option value="new">New Page</option>
-                    <option disabled="disabled">custom URL</option>
                     <option disabled="disabled">existing pages:</option>
                     {% for page in page_list %}
                     <option value="{{ page.id }}" {% if entry.dest_page and entry.dest_page == page.id|slugify %}selected="selected"{% endif %}>{{ page.title }}</option>
