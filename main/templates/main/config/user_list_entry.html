@@ -1,0 +1,13 @@
+<tr class="editable_container user_entry">
+    <td><span data-name="id">{% if k %}{{ k.id }}{% else %}-1{% endif %}</span></td>
+    <td><span class="editable" data-name="username"{% if not k %} contenteditable="true"{% endif %}>{{ k.username }}</span></td>
+    <td><span class="editable" data-name="email"{% if not k %} contenteditable="true"{% endif %}>{{ k.email }}</span></td>
+    <td><span class="editable" data-name="password"{% if not k %} contenteditable="true"{% endif %}></span></td>
+    <td class="toggleable_container">
+        <button class="toggle_button toggleable edit_button{% if not k %} hidden{% endif %}">edit</button>
+        <span class="toggleable{% if k %} hidden{% endif %}">
+            <label>remove: <input type="checkbox" name="remove"></label>
+        </span>
+        <button class="toggleable{% if k %} hidden{% endif %} user_save_button">save</button>
+    </td>
+</tr>

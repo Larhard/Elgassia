@@ -10,7 +10,7 @@ class CustomUserManager(django.UserManager):
         except self.model.DoesNotExist:
             pass
 
-        super(CustomUserManager, self)._create_user(username, *args, **kwargs)
+        return super(CustomUserManager, self)._create_user(username, *args, **kwargs)
 
     def get_by_natural_key(self, username):
         return self.get(**{self.model.USERNAME_FIELD+'__iexact': username})
@@ -18,3 +18,6 @@ class CustomUserManager(django.UserManager):
 
 class CustomUser(django.AbstractUser):
     objects = CustomUserManager()
+
+    def set_email(self, email):
+        self.email = CustomUserManager.normalize_email(email)

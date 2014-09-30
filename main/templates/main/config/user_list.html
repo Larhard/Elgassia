@@ -1,0 +1,79 @@
+{% extends 'main/base_generic.html' %}
+
+{% block title %}
+    {{ block.super }}
+    - User List
+{% endblock %}
+
+{% block content %}
+    <script type="text/javascript">
+        function user_save() {
+            var user_save_button = $(this);
+            var user_entry = user_save_button.closest(".user_entry");
+            var idx_field = user_entry.find("[data-name*='id']");
+            var idx = idx_field.text();
+            var username = user_entry.find("[data-name*='username']").text();
+            var email = user_entry.find("[data-name*='email']").text();
+            var password_field = user_entry.find("[data-name*='password']");
+            var password = password_field.text();
+            var remove = user_entry.find("[name*='remove']").prop("checked");
+
+            user_save_button.prop("disabled", true);
+
+            $.post("{% url "main:config:user_save" %}",
+                    {
+                        "idx": idx,
+                        "username": username,
+                        "email": email,
+                        "password": password,
+                        "remove": remove,
+                        "csrfmiddlewaretoken": csrftoken
+                    },
+                    function(data) {
+                        if(data["success"] == true) {
+                            user_save_button.prop("disabled", false);
+                            if (data["removed"] == true) {
+                                user_entry.remove()
+                            } else {
+                                idx_field.text(data["idx"]);
+                                password_field.text("");
+                                toggle_toggle(user_save_button);
+                                edit_toggle(user_save_button);
+                            }
+                        } else {
+                            user_save_button.prop("disabled", false);
+                            alert(data["error"]);
+                        }
+                    }
+            ).fail(function() {
+                        user_save_button.prop("disabled", false);
+                        alert("Undefined Error");
+                    }
+            );
+        }
+        $(document).on("click", ".user_save_button", user_save);
+
+        function user_list_add() {
+            {% spaceless %}
+                $(".user_list").append('{% include 'main/config/user_list_entry.html' %}');
+            {% endspaceless %}
+        }
+        $(document).on("click", ".user_list_add_button", user_list_add);
+
+    </script>
+
+    <table class="user_list">
+    <tr>
+        <th>id</th>
+        <th>Username</th>
+        <th>e-mail</th>
+        <th>Password</th>
+        <th></th>
+    </tr>
+    {% for k in users %}
+        {% include 'main/config/user_list_entry.html' %}
+    {% endfor %}
+    </table>
+    <button class="user_list_add_button">add</button>
+
+{% endblock %}

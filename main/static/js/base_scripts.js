@@ -1,22 +1,29 @@
-function slide_button() {
-    find_first_children($(this).closest(".slidable_container"), ".slidable").slideToggle();
+function edit_toggle(button) {
+    find_first_children(button.closest(".editable_container"), ".editable").each(function() {
+        $(this).prop("contentEditable", $(this).prop("contentEditable") != "true");
+    });
 }
 
-function toggle_button() {
-    find_first_children($(this).closest(".toggleable_container"), ".toggleable").toggle();
+function slide_toggle(button) {
+    find_first_children(button.closest(".slidable_container"), ".slidable").slideToggle();
 }
 
-function sorting_button() {
-    find_first_children($(this).closest(".sortable_container"), ".sortable").sortable();
+function toggle_toggle(button) {
+    find_first_children(button.closest(".toggleable_container"), ".toggleable").toggle();
 }
 
-function button_href() {
+function sorting_toggle(button) {
+    find_first_children(button.closest(".sortable_container"), ".sortable").sortable();
+}
+
+function href_button(button) {
     location.href = $(this).attr('data-href');
 }
 
 $(document).ready(function() {
-    $(document).on("click", ".slide_button", slide_button);
-    $(document).on("click", ".toggle_button", toggle_button);
-    $(document).on("click", ".sorting_button", sorting_button);
-    $(document).on("click", ".href", button_href)
+    $(document).on("click", ".edit_button", function() {edit_toggle($(this))});
+    $(document).on("click", ".slide_button", function() {slide_toggle($(this))});
+    $(document).on("click", ".toggle_button", function() {toggle_toggle($(this))});
+    $(document).on("click", ".sorting_button", function() {sorting_toggle($(this))});
+    $(document).on("click", ".href", href_button)
 });

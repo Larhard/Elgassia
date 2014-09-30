@@ -1,8 +1,10 @@
 import json
+from django.contrib.auth import get_user_model
 
 from django.core.urlresolvers import reverse
 from django.db.utils import IntegrityError
 from django.shortcuts import HttpResponse, render
+from django.shortcuts import render_to_response
 
 from elgassia.settings import DEBUG
 from main.models import MainMenu, StandardPage, Config
@@ -145,4 +147,56 @@ def config_editor_save(request):
         error += e.message
 
     response = {'success': error == '', 'error': error}
+    return HttpResponse(json.dumps(response), content_type='application/json')
+
+
+@staff_member_required()
+def user_list_view(request):
+    User = get_user_model()
+    return render(request, 'main/config/user_list.html', {
+        'users': User.objects.all()
+    })
+
+
+@staff_member_required()
+def user_save(request):
+    error = ''
+    response = {
+        'removed': False,
+        'idx': None,
+    }
+
+    try:
+        idx = request.POST['idx']
+        username = request.POST['username']
+        email = request.POST['email']
+        password = request.POST['password']
+        remove = request.POST['remove']
+
+        User = get_user_model()
+        try:
+            user = None
+            if idx == '-1':
+                if remove != 'true':
+                    user = User.objects.create_user(username=username, email=email)
+            else:
+                user = User.objects.get(id=idx)
+                if remove == 'true':
+                    user.delete()
+                    response['removed'] = True
+                else:
+                    user.username = username
+                    user.set_email(email)
+                    if password:
+                        user.set_password(password)
+                    user.save()
+            response['idx'] = user.id
+        except (IntegrityError, ValueError, ) as e:
+            error += e.message
+    except Exception as e:
+        print e.message
+        print type(e)
+
+    response['success'] = error == ''
+    response['error'] = error
     return HttpResponse(json.dumps(response), content_type='application/json')
