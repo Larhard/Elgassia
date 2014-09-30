@@ -1,9 +1,7 @@
-from django.contrib.auth.decorators import user_passes_test
+import django.contrib.admin.views.decorators as django
 
 
-def staff_member_required(view_func, redirect_field_name=None, login_url='main:home'):
-    return user_passes_test(
-        lambda u: u.is_active and u.is_staff,
-        login_url=login_url,
-        redirect_field_name=redirect_field_name
-    )(view_func)
+def staff_member_required(redirect_field_name=None, login_url='main:home'):
+    def wrapper(view_func):
+        return django.staff_member_required(view_func, redirect_field_name=redirect_field_name, login_url=login_url)
+    return wrapper

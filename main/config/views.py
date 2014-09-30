@@ -9,7 +9,7 @@ from main.models import MainMenu, StandardPage, Config
 from main.utils.decorators import staff_member_required
 
 
-@staff_member_required
+@staff_member_required()
 def main_menu_save(request):
     error = ''
 
@@ -52,14 +52,14 @@ def main_menu_save(request):
     return HttpResponse(json.dumps(response), content_type='application/json')
 
 
-@staff_member_required
+@staff_member_required()
 def page_list(request):
     return render(request, 'main/config/page_list.html', {
         'pages': StandardPage.objects.all()
     })
 
 
-@staff_member_required
+@staff_member_required()
 def page_list_save(request):
     error = ''
 
@@ -84,7 +84,7 @@ def page_list_save(request):
     return HttpResponse(json.dumps(response), content_type='application/json')
 
 
-@staff_member_required
+@staff_member_required()
 def page_edit(request, idx):
     page = StandardPage.objects.get(id=idx)
 
@@ -94,7 +94,7 @@ def page_edit(request, idx):
     return render(request, 'main/config/page_edit.html', {'page': page, 'next_page': next_page})
 
 
-@staff_member_required
+@staff_member_required()
 def page_edit_save(request):
     error = ''
     try:
@@ -111,7 +111,7 @@ def page_edit_save(request):
     return HttpResponse(json.dumps(response), content_type='application/json')
 
 
-@staff_member_required
+@staff_member_required()
 def config_editor(request):
     configs = Config.objects.all()
     return render(request, 'main/config/config_editor.html', {
@@ -119,7 +119,7 @@ def config_editor(request):
     })
 
 
-@staff_member_required
+@staff_member_required()
 def config_editor_save(request):
     error = ''
 
