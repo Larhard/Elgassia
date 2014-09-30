@@ -110,3 +110,8 @@ com_crashlytics_export_strings.xml
 
 /static
 /elgassia/local_settings.py
+
+
+### automated ctags ###
+
+.atags
