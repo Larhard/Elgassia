@@ -37,7 +37,7 @@
     function main_menu_add_entry() {
         {% spaceless %}
         $("#main_menu_list").append(
-                '<li>{% include 'main/main_menu/edit_entry.html' %}</li>'
+                '<li>{% include 'main/main_menu_edit_entry.html' %}</li>'
         );
         {% endspaceless %}
     }
@@ -67,7 +67,7 @@
 
         {% if user.is_staff %}
             {% with hidden='hidden' %}
-            {% include 'main/main_menu/edit_entry.html' %}
+            {% include 'main/main_menu_edit_entry.html' %}
             {% endwith %}
         {% endif %}
     </li>
