@@ -56,6 +56,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'jquery',
     'main',
+    'custom_auth',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -112,6 +113,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = ()
+
+AUTH_USER_MODEL = 'custom_auth.CustomUser'
 
 try:
     from local_settings import *
