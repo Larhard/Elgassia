@@ -13,7 +13,15 @@ function toggle_toggle(button) {
 }
 
 function sorting_toggle(button) {
-    find_first_children(button.closest(".sortable_container"), ".sortable").sortable();
+    find_first_children(button.closest(".sortable_container"), ".sortable").each(function() {
+        if ($(this).hasClass("ui-sortable-disabled")) {
+            $(this).sortable("enable")
+        } else if ($(this).hasClass("ui-sortable")) {
+            $(this).sortable("disable")
+        } else {
+            $(this).sortable();
+        }
+    });
 }
 
 function href_button(button) {

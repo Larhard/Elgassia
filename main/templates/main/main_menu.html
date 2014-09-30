@@ -76,6 +76,7 @@
 {% if user.is_staff %}
     <div class="align_right">
         <button class="toggle_button sorting_button toggleable">edit</button>
+        <button class="toggle_button sorting_button toggleable hidden">cancel</button>
         <button id="main_menu_add_entry_button" class="toggleable hidden">add</button>
         <button id="main_menu_save_button" class="toggleable hidden" data-url="{% url 'main:config:main_menu_save' %}">save</button>
     </div>
