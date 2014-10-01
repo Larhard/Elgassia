@@ -45,5 +45,10 @@ function submit_and_redirect(url, data, redirect) {
                 alert(data['error']);
             }
         }
+    ).fail(
+        function() {
+            user_save_button.prop("disabled", false);
+            alert("Undefined Error");
+        }
     );
 }

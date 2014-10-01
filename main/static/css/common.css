@@ -28,3 +28,7 @@ input {
 .link {
     cursor: pointer;
 }
+
+.table {
+    display: table;
+}

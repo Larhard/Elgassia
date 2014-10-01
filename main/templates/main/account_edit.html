@@ -1,0 +1,57 @@
+{% extends 'main/base_generic.html' %}
+
+{% block title %}
+    {{ block.super }}
+    - Edit Account
+{% endblock %}
+
+{% block content %}
+    <script>
+        function account_edit_save() {
+            var email = $(".account_edit_entry[name*='email']").val();
+            var password = $(".account_edit_entry[name*='password']").val();
+            var password_confirm = $(".account_edit_entry[name*='password_confirm']").val();
+
+            if (password != password_confirm) {
+                alert("Passwords does not match");
+                return;
+            }
+
+            submit_and_redirect("{% url 'main:account_save' %}", {
+                "csrfmiddlewaretoken": csrftoken,
+                "email": email,
+                "password": password
+            });
+        }
+        $(document).on("click", ".account_edit_save_button", account_edit_save)
+    </script>
+    <div class="table align_right">
+        <ul class="clean">
+            <li>
+                <label>
+                    Login:
+                    <input type="text" value="{{ user.username }}" disabled="disabled">
+                </label>
+            </li>
+            <li>
+                <label>
+                    e-mail:
+                    <input class="account_edit_entry" type="text" value="{{ user.email }}" name="email">
+                </label>
+            </li>
+            <li>
+                <label>
+                    password:
+                    <input class="account_edit_entry" type="password" name="password">
+                </label>
+            </li>
+            <li>
+                <label>
+                    password (confirm):
+                    <input class="account_edit_entry" type="password" name="password_confirm">
+                </label>
+            </li>
+        </ul>
+        <button class="account_edit_save_button">save</button>
+    </div>
+{% endblock %}

@@ -178,7 +178,10 @@ def user_save(request):
             user = None
             if idx == '-1':
                 if remove != 'true':
-                    user = User.objects.create_user(username=username, email=email)
+                    user_data = {'username': username, 'email': email}
+                    if password:
+                        user_data['password'] = password
+                    user = User.objects.create_user(**user_data)
             else:
                 user = User.objects.get(id=idx)
                 if remove == 'true':

@@ -9,6 +9,8 @@ urlpatterns = patterns('main.views',
                        url(r'^logout/$', 'logout_view', name='logout'),
                        url(r'^page/(\d+)$', 'page_view', name='page'),
                        url(r'^change_theme/$', 'change_theme', name='change_theme'),
+                       url(r'^account/edit/$', 'account_edit', name='account_edit'),
+                       url(r'^account/save/$', 'account_save', name='account_save'),
 
                        url(r'^config/', include(main.config.urls, namespace='config')),
                        )

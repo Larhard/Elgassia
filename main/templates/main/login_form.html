@@ -35,4 +35,5 @@
         Logged as {{ user.username }}
     </div>
     <div class="link popup_entry clickable logout_button" data-url="{% url 'main:logout' %}">Logout</div>
+    <div class="href link popup_entry clickable" data-href="{% url 'main:account_edit' %}">Edit Account</div>
 {% endif %}

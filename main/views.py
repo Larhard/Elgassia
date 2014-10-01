@@ -4,9 +4,11 @@ from django.contrib.auth import authenticate, login, logout
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.shortcuts import render_to_response
 from django.views.decorators.csrf import ensure_csrf_cookie
 
 from main.models import StandardPage, Config
+from main.utils.decorators import login_required
 
 
 @ensure_csrf_cookie
@@ -59,4 +61,27 @@ def change_theme(request):
     response = {'success': error == '', 'error': error}
     result = HttpResponse(json.dumps(response), content_type='application/json')
     result.set_cookie('theme', new_theme)
+    return result
+
+
+@login_required()
+def account_edit(request):
+    return render(request, 'main/account_edit.html')
+
+
+@login_required()
+def account_save(request):
+    error = ''
+
+    email = request.POST['email']
+    password = request.POST['password']
+
+    request.user.set_email(email)
+    if password:
+        request.user.set_password(password)
+
+    request.user.save()
+
+    response = {'success': error == '', 'error': error}
+    result = HttpResponse(json.dumps(response), content_type='application/json')
     return result
