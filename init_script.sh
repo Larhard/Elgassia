@@ -1,12 +1,12 @@
 #!/bin/sh
 ### BEGIN INIT INFO
-# Provides:          makalgo
+# Provides:          elgassia
 # Required-Start:    $remote_fs $syslog $lighttpd
 # Required-Stop:     $remote_fs $syslog $lighttpd
 # Default-Start:     2 3 4 5
 # Default-Stop:      0 1 6
-# Short-Description: start Makalgo
-# Description:       Makalgo website
+# Short-Description: start Elgassia
+# Description:       Elgassia website
 ### END INIT INFO
 
 
